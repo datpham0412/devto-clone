@@ -1,6 +1,6 @@
 import React from "react";
 import CardComponent from "~/components/CardComponent";
-import Image from 'next/image';
+import Image from "next/image";
 
 interface ListingItem {
   id: number;
@@ -39,10 +39,15 @@ const RightSidebar: React.FC = () => {
     <aside className="rightBar">
       <div className="rightBar__card-hackathon">
         <p>
-          <Image src="https://picsum.photos/200/300" alt="" width={200} height={300} />
+          <Image
+            src="https://picsum.photos/200/300"
+            alt=""
+            width={200}
+            height={300}
+          />
         </p>
         <h2>
-          <a href="/#">"Hack the Planet" with New Relic & DEV</a>
+          <a href="/#">&quot;Hack the Planet&quot; with New Relic &amp; DEV</a>
         </h2>
 
         <p>

@@ -1,24 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from 'next/link';
-import {
-  FcHome,
-  FcReading,
-  FcTodoList,
-  FcVideoCall,
-  FcAbout,
-  FcIdea,
-  FcShop,
-  FcLike,
-  FcBriefcase,
-  FcDisclaimer,
-  FcBusinessContact,
-} from "react-icons/fc";
-import { AiFillAudio } from "react-icons/ai";
-import { FaTags, FaDev } from "react-icons/fa";
-import { IoLogoTwitter, IoLogoFacebook, IoLogoGithub } from "react-icons/io";
-import { RiInstagramFill, RiTwitchLine } from "react-icons/ri";
+import Link from "next/link";
+import { FcHome, FcReading, FcTodoList } from "react-icons/fc";
 import { CgShapeHexagon } from "react-icons/cg";
 import { GrFormClose } from "react-icons/gr";
 
@@ -66,13 +50,12 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
                 Home
               </Link>
             </li>
-            {/* ... rest of the menu items ... */}
           </ul>
         </nav>
 
-        <div className={more ? "leftBar__social" : "leftBar__social hidden"}>
-          {/* ... social media links ... */}
-        </div>
+        <div
+          className={more ? "leftBar__social" : "leftBar__social hidden"}
+        ></div>
         <nav className="leftBar__taglist">
           <header>
             <h3>My Tags</h3>
@@ -100,9 +83,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
               </button>
             </header>
 
-            <div className="hamburger__content__items">
-              {/* ... hamburger menu content ... */}
-            </div>
+            <div className="hamburger__content__items"></div>
           </div>
 
           <div className="hamburger overlay"></div>
