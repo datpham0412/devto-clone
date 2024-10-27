@@ -24,11 +24,15 @@ const Content: React.FC = () => {
   const [articles, setArticles] = useState<Article[] | null>(null);
 
   useEffect(() => {
-    const fetchAgain = () => {
+    const fetchAgain = async () => {
       if (articles != null) {
-        fetch("https://dev.to/api/articles")
-          .then((res) => res.json())
-          .then((result: Article[]) => setArticles([...articles, ...result]));
+        try {
+          const res = await fetch("https://dev.to/api/articles");
+          const result = (await res.json()) as Article[];
+          setArticles([...articles, ...result]);
+        } catch (error) {
+          console.error("Error fetching articles:", error);
+        }
       }
     };
 
@@ -43,13 +47,13 @@ const Content: React.FC = () => {
         body.offsetHeight,
         html.clientHeight,
         html.scrollHeight,
-        html.offsetHeight
+        html.offsetHeight,
       );
 
       const windowBottom = windowheight + window.pageYOffset;
       if (windowBottom >= docHeight) {
         console.log("we reached the bottom");
-        fetchAgain();
+        void fetchAgain();
       }
     };
 
@@ -59,11 +63,18 @@ const Content: React.FC = () => {
   }, [articles]);
 
   useEffect(() => {
-    setTimeout(async () => {
-      const res = await fetch("https://dev.to/api/articles");
-      const data: Article[] = await res.json();
+    const fetchInitialArticles = async () => {
+      try {
+        const res = await fetch("https://dev.to/api/articles");
+        const data = (await res.json()) as Article[];
+        setArticles(data);
+      } catch (error) {
+        console.error("Error fetching initial articles:", error);
+      }
+    };
 
-      setArticles(data);
+    void setTimeout(() => {
+      void fetchInitialArticles();
     }, 2000);
   }, []);
 
@@ -87,12 +98,9 @@ const Content: React.FC = () => {
         </select>
       </header>
       <div className="articles">
-        {articles &&
-          articles.map((article) => (
-            <ArticleComponent key={article.id} data={article} />
-          ))}
-
-        {!articles && [1, 2, 3, 4, 5].map((a) => <ArticleSkeleton key={a} />)}
+        {articles?.map((article) => (
+          <ArticleComponent key={article.id} data={article} />
+        )) ?? [1, 2, 3, 4, 5].map((a) => <ArticleSkeleton key={a} />)}
       </div>
     </main>
   );
