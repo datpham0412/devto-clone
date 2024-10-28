@@ -5,8 +5,8 @@ import { BiHeart } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from "next/link";
+import Image from "next/image";
 
 dayjs.extend(relativeTime);
 
@@ -41,11 +41,11 @@ const ArticleComponent: React.FC<ArticleProps> = ({ data }) => {
   } = data;
 
   return (
-    <article className="article">
+    <article className="mb-4 mt-2 rounded-lg bg-white shadow">
       {cover_image && (
         <Link
           href={url}
-          className="article__image"
+          className="block hidden h-auto w-full rounded-t-lg bg-cover bg-center pb-[40%] first:block"
           style={{
             backgroundImage: `url(${cover_image})`,
           }}
@@ -53,16 +53,24 @@ const ArticleComponent: React.FC<ArticleProps> = ({ data }) => {
           &nbsp;
         </Link>
       )}
-      <div className="article__details">
-        <div className="u-pic">
-          <Image src={user.profile_image_90} alt="" width={40} height={40} />
+      <div className="relative flex p-4">
+        <div className="block w-8">
+          <Image
+            src={user.profile_image_90}
+            alt=""
+            width={40}
+            height={40}
+            className="w-full rounded-full"
+          />
         </div>
-        <div className="u-details">
+        <div className="mb-2 flex flex-col pl-2">
           <Link href={`https://dev.to/${user.username}`}>
-            <span className="u-name">{user.username}</span>
+            <span className="text-sm text-gray-600 hover:text-gray-800">
+              {user.username}
+            </span>
           </Link>
           <Link href={url}>
-            <span className="time">
+            <span className="text-sm text-gray-600 hover:text-gray-800">
               {new Date(published_at).toLocaleDateString(undefined, {
                 day: "numeric",
                 month: "long",
@@ -72,33 +80,41 @@ const ArticleComponent: React.FC<ArticleProps> = ({ data }) => {
           </Link>
 
           <Link href={url}>
-            <h3>{title}</h3>
+            <h3 className="mt-4 text-2xl hover:text-blue-600">{title}</h3>
           </Link>
 
-          <div className="tags">
+          <div className="mt-4 flex flex-wrap">
             {tag_list.map((tag, id) => (
               <Link key={id} href={`https://dev.to/t/${tag}`}>
-                <span className="tag">#{tag}</span>
+                <span className="p-1 text-sm text-gray-600 hover:text-gray-900">
+                  #{tag}
+                </span>
               </Link>
             ))}
           </div>
 
-          <div className="additional-details">
-            <div className="reactions">
+          <div className="mt-4 flex items-center">
+            <div className="flex-1">
               {public_reactions_count + positive_reactions_count > 0 && (
-                <Link href={url}>
+                <Link
+                  href={url}
+                  className="-ml-4 rounded-lg px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                >
                   <span>
                     <i>
                       <BiHeart />
                     </i>
                     &nbsp;
                     {public_reactions_count + positive_reactions_count} &nbsp;
-                    <span className="hidden-mobile">reactions</span>
+                    <span className="hidden md:inline">reactions</span>
                   </span>
                 </Link>
               )}
 
-              <Link href={url}>
+              <Link
+                href={url}
+                className="rounded-lg px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+              >
                 <span>
                   <i>
                     <FaRegComment />
@@ -107,23 +123,25 @@ const ArticleComponent: React.FC<ArticleProps> = ({ data }) => {
                   {comments_count > 0 ? (
                     <span>
                       {comments_count} &nbsp;
-                      <span className="hidden-mobile">comments</span>
+                      <span className="hidden md:inline">comments</span>
                     </span>
                   ) : null}
                   {comments_count === 0 ? (
                     <span>
-                      <span className="show-mobile">{comments_count}</span>
+                      <span className="md:hidden">{comments_count}</span>
                       &nbsp;
-                      <span className="hidden-mobile">Add comment</span>
+                      <span className="hidden md:inline">Add comment</span>
                     </span>
                   ) : null}
                 </span>
               </Link>
             </div>
 
-            <div className="save">
-              <small>1 min read</small>
-              <button>save</button>
+            <div className="absolute right-0 ml-4 pr-4">
+              <small className="mr-2 text-gray-600">1 min read</small>
+              <button className="rounded-lg bg-gray-100 px-3 py-1 text-gray-600 transition-all duration-200 hover:bg-gray-200 hover:text-gray-800">
+                save
+              </button>
             </div>
           </div>
         </div>
