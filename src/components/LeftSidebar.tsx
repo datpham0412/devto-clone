@@ -21,7 +21,7 @@ import { IoLogoTwitter, IoLogoFacebook, IoLogoGithub } from "react-icons/io";
 import { RiInstagramFill, RiTwitchLine } from "react-icons/ri";
 import { CgShapeHexagon } from "react-icons/cg";
 import { GrFormClose } from "react-icons/gr";
-import { IconType } from "react-icons";
+import type { IconType } from "react-icons";
 
 const tags = [
   "react",
