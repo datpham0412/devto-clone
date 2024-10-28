@@ -58,7 +58,6 @@ const Content: React.FC = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, [articles]);
 
@@ -79,17 +78,46 @@ const Content: React.FC = () => {
   }, []);
 
   return (
-    <main className="main-content">
-      <header>
-        <h1>Posts</h1>
-        <nav>
-          <a href="/#">Feed</a>
-          <a href="/#">Week</a>
-          <a href="/#">Month</a>
-          <a href="/#">Infinity</a>
-          <a href="/#">Latest</a>
+    <main>
+      <header className="flex items-center py-2">
+        <h1 className="flex-1 text-xl">Posts</h1>
+        <nav className="hidden md:block">
+          <a
+            href="/#"
+            className="relative mx-2 rounded-lg px-2 py-2 font-bold after:absolute after:bottom-0 after:left-0 after:right-0 after:mx-2 after:h-[3px] after:rounded-lg after:bg-blue-600 after:transition-all after:duration-200 hover:bg-blue-600/10 hover:text-blue-600 hover:after:mx-0 hover:after:rounded-none"
+          >
+            Feed
+          </a>
+          <a
+            href="/#"
+            className="mx-2 rounded-lg px-2 py-2 hover:bg-blue-600/10 hover:text-blue-600"
+          >
+            Week
+          </a>
+          <a
+            href="/#"
+            className="mx-2 rounded-lg px-2 py-2 hover:bg-blue-600/10 hover:text-blue-600"
+          >
+            Month
+          </a>
+          <a
+            href="/#"
+            className="mx-2 rounded-lg px-2 py-2 hover:bg-blue-600/10 hover:text-blue-600"
+          >
+            Infinity
+          </a>
+          <a
+            href="/#"
+            className="mx-2 rounded-lg px-2 py-2 hover:bg-blue-600/10 hover:text-blue-600"
+          >
+            Latest
+          </a>
         </nav>
-        <select id="dropdown-select" className="dropdown" defaultValue="Feed">
+        <select
+          id="dropdown-select"
+          className="rounded-lg border border-gray-300 bg-gray-50 p-2 text-base outline-none focus:shadow-[0_0_1px_1px_rgba(59,73,223,1)] md:hidden"
+          defaultValue="Feed"
+        >
           <option value="Feed">Feed</option>
           <option value="Week">Week</option>
           <option value="Month">Month</option>
@@ -97,7 +125,7 @@ const Content: React.FC = () => {
           <option value="Infinity">Infinity</option>
         </select>
       </header>
-      <div className="articles">
+      <div>
         {articles?.map((article) => (
           <ArticleComponent key={article.id} data={article} />
         )) ?? [1, 2, 3, 4, 5].map((a) => <ArticleSkeleton key={a} />)}
