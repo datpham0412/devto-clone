@@ -52,26 +52,27 @@ const Content: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const handleScroll = async () => {
+    const handleScroll = () => {
       if (loading) return;
 
       const scrollTop = window.scrollY;
       const scrollHeight = document.documentElement.scrollHeight;
       const clientHeight = document.documentElement.clientHeight;
 
-      // Start loading when user is 300px from bottom
       if (scrollTop + clientHeight >= scrollHeight - 300) {
-        setLoading(true);
-        const nextPage = page + 1;
-        const newArticles = await fetchArticles(nextPage);
+        void (async () => {
+          setLoading(true);
+          const nextPage = page + 1;
+          const newArticles = await fetchArticles(nextPage);
 
-        if (newArticles && newArticles.length > 0) {
-          setArticles((prev) =>
-            prev ? [...prev, ...newArticles] : newArticles,
-          );
-          setPage(nextPage);
-        }
-        setLoading(false);
+          if (newArticles && newArticles.length > 0) {
+            setArticles((prev) =>
+              prev ? [...prev, ...newArticles] : newArticles,
+            );
+            setPage(nextPage);
+          }
+          setLoading(false);
+        })();
       }
     };
 
