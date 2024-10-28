@@ -22,60 +22,62 @@ interface Article {
 
 const Content: React.FC = () => {
   const [articles, setArticles] = useState<Article[] | null>(null);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchAgain = async () => {
-      if (articles != null) {
-        try {
-          const res = await fetch("https://dev.to/api/articles");
-          const result = (await res.json()) as Article[];
-          setArticles([...articles, ...result]);
-        } catch (error) {
-          console.error("Error fetching articles:", error);
-        }
-      }
-    };
-
-    const handleScroll = () => {
-      const html = document.documentElement;
-      const body = document.body;
-      const windowheight =
-        "innerHeight" in window ? window.innerHeight : html.offsetHeight;
-
-      const docHeight = Math.max(
-        body.scrollHeight,
-        body.offsetHeight,
-        html.clientHeight,
-        html.scrollHeight,
-        html.offsetHeight,
-      );
-
-      const windowBottom = windowheight + window.pageYOffset;
-      if (windowBottom >= docHeight) {
-        console.log("we reached the bottom");
-        void fetchAgain();
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [articles]);
+  const fetchArticles = async (pageNum: number) => {
+    try {
+      const res = await fetch(`https://dev.to/api/articles?page=${pageNum}`);
+      const data = (await res.json()) as Article[];
+      return data;
+    } catch (error) {
+      console.error("Error fetching articles:", error);
+      return null;
+    }
+  };
 
   useEffect(() => {
     const fetchInitialArticles = async () => {
-      try {
-        const res = await fetch("https://dev.to/api/articles");
-        const data = (await res.json()) as Article[];
+      const data = await fetchArticles(1);
+      if (data) {
         setArticles(data);
-      } catch (error) {
-        console.error("Error fetching initial articles:", error);
       }
+      setInitialLoading(false);
     };
 
     void setTimeout(() => {
       void fetchInitialArticles();
     }, 2000);
   }, []);
+
+  useEffect(() => {
+    const handleScroll = async () => {
+      if (loading) return;
+
+      const scrollTop = window.scrollY;
+      const scrollHeight = document.documentElement.scrollHeight;
+      const clientHeight = document.documentElement.clientHeight;
+
+      // Start loading when user is 300px from bottom
+      if (scrollTop + clientHeight >= scrollHeight - 300) {
+        setLoading(true);
+        const nextPage = page + 1;
+        const newArticles = await fetchArticles(nextPage);
+
+        if (newArticles && newArticles.length > 0) {
+          setArticles((prev) =>
+            prev ? [...prev, ...newArticles] : newArticles,
+          );
+          setPage(nextPage);
+        }
+        setLoading(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [loading, page]);
 
   return (
     <main>
@@ -126,9 +128,22 @@ const Content: React.FC = () => {
         </select>
       </header>
       <div>
-        {articles?.map((article) => (
-          <ArticleComponent key={article.id} data={article} />
-        )) ?? [1, 2, 3, 4, 5].map((a) => <ArticleSkeleton key={a} />)}
+        {initialLoading ? (
+          // Initial loading skeletons
+          [1, 2, 3, 4, 5].map((a) => <ArticleSkeleton key={a} />)
+        ) : (
+          <>
+            {articles?.map((article) => (
+              <ArticleComponent key={article.id} data={article} />
+            ))}
+            {/* Loading more indicator */}
+            {loading && (
+              <div className="flex justify-center py-4">
+                <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-600 border-t-transparent"></div>
+              </div>
+            )}
+          </>
+        )}
       </div>
     </main>
   );
