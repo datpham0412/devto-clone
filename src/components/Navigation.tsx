@@ -63,6 +63,9 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
     { text: "Signout", href: "/signout" },
   ];
 
+  const userAvatar = user?.user_metadata?.avatar_url as string | undefined;
+  const avatarUrl = userAvatar ?? "https://picsum.photos/200";
+
   return (
     <header className="flex h-[56px] w-full max-w-full bg-white px-12 py-4">
       <div className="flex w-full max-w-[1280px] items-center">
@@ -109,7 +112,7 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
               ))}
               <span onClick={() => setShowMenu(!showMenu)} className="mx-4 h-8 w-8 cursor-pointer">
                 <Image
-                  src={user.user_metadata.avatar_url ?? "https://picsum.photos/200"}
+                  src={avatarUrl}
                   alt="Profile Picture"
                   width={32}
                   height={32}
@@ -136,7 +139,6 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
         </div>
       </div>
 
-      {/* Dropdown Menu */}
       {showMenu && user && (
         <div className="absolute right-16 top-[56px] z-10 min-w-[250px] rounded-lg border-2 border-gray-900 bg-white shadow-[4px_4px_0_0_rgba(0,0,0,0.9)]">
           <ul>
