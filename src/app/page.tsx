@@ -15,13 +15,21 @@ function HomeClient() {
   const closeMenu = React.useCallback(() => setIsBurgerMenuOpen(false), []);
 
   return (
-    <div className="home-container">
+    <div className="min-h-screen bg-[#f5f5f5]">
       <Navigation openMenu={openMenu} />
-      <main className="main-content">
-        <LeftSidebar burgerMenu={isBurgerMenuOpen} closeMenu={closeMenu} />
-        <Content />
-        <RightSidebar />
-      </main>
+      <div className="mx-auto max-w-[1280px] px-4 py-8">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-[240px_1fr] lg:grid-cols-[240px_2fr_1fr]">
+          <div className="hidden md:block">
+            <LeftSidebar burgerMenu={isBurgerMenuOpen} closeMenu={closeMenu} />
+          </div>
+          <div>
+            <Content />
+          </div>
+          <div className="hidden lg:block">
+            <RightSidebar />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

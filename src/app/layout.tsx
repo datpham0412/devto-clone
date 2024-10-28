@@ -1,5 +1,4 @@
-import "~/styles/globals.css";
-
+import "./globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
@@ -13,17 +12,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
+    <html lang="en" className={GeistSans.variable}>
       <body>
-        <TRPCReactProvider>
-          <div className="flex flex-col min-h-screen">
-            <main className="flex-grow container mx-auto px-4 py-8">
-              {children}
-            </main>
-          </div>
-        </TRPCReactProvider>
+        <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
     </html>
   );
