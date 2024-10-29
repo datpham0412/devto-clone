@@ -22,6 +22,12 @@ export default function SignUp() {
     try {
       console.log("Starting signup process...");
 
+      console.log("Signup request:", {
+        email,
+        username,
+        redirectTo: `${window.location.origin}/auth/callback`,
+      });
+
       const { data, error } = await supabase.auth.signUp({
         email,
         password,

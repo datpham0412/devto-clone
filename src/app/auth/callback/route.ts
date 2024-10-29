@@ -16,7 +16,6 @@ export async function GET(request: NextRequest) {
       await supabase.auth.exchangeCodeForSession(code);
     }
 
-    // Use configured app URL for production
     return NextResponse.redirect(new URL(next, config.appUrl));
   } catch (error) {
     console.error('Auth callback error:', error);
