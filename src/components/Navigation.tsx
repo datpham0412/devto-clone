@@ -8,13 +8,12 @@ import { BiMessageRoundedCheck } from "react-icons/bi";
 import { RiNotificationLine } from "react-icons/ri";
 import { FiSearch } from "react-icons/fi";
 import { supabase } from "~/lib/supabase";
-import type { User } from '@supabase/supabase-js';
+import type { User } from "@supabase/supabase-js";
 
 interface NavigationProps {
   openMenu: () => void;
 }
 
-// Add MenuLink interface
 interface MenuLink {
   text: string;
   href: string;
@@ -25,7 +24,9 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
     });
 
@@ -37,30 +38,11 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
     setShowMenu(false);
   };
 
-  const handleGithubLogin = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: 'github',
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`
-      }
-    });
-  };
-
-  const handleGoogleLogin = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`
-      }
-    });
-  };
-
   const menuLinks: MenuLink[] = [
     { text: "Dashboard", href: "/dashboard" },
     { text: "Writing a Post", href: "/post" },
     { text: "Reading list", href: "/list" },
     { text: "Settings", href: "/settings" },
-    { text: "Signout", href: "/signout" },
   ];
 
   const userAvatar = user?.user_metadata?.avatar_url as string | undefined;
@@ -102,15 +84,20 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
               <i className="hidden">
                 <FiSearch />
               </i>
-              {[BiMessageRoundedCheck, RiNotificationLine].map((Icon, index) => (
-                <i
-                  key={index}
-                  className="mx-4 flex cursor-pointer items-center rounded-full p-2 text-2xl text-gray-700 hover:bg-gray-100/50 hover:text-gray-900 hover:shadow-[0_0_0_10px_rgba(0,0,0,0.05)]"
-                >
-                  <Icon />
-                </i>
-              ))}
-              <span onClick={() => setShowMenu(!showMenu)} className="mx-4 h-8 w-8 cursor-pointer">
+              {[BiMessageRoundedCheck, RiNotificationLine].map(
+                (Icon, index) => (
+                  <i
+                    key={index}
+                    className="mx-4 flex cursor-pointer items-center rounded-full p-2 text-2xl text-gray-700 hover:bg-gray-100/50 hover:text-gray-900 hover:shadow-[0_0_0_10px_rgba(0,0,0,0.05)]"
+                  >
+                    <Icon />
+                  </i>
+                ),
+              )}
+              <span
+                onClick={() => setShowMenu(!showMenu)}
+                className="mx-4 h-8 w-8 cursor-pointer"
+              >
                 <Image
                   src={avatarUrl}
                   alt="Profile Picture"
@@ -144,8 +131,12 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
           <ul>
             <li className="cursor-pointer border-b border-gray-200 p-3">
               <Link href={`/user/${user.user_metadata.user_name}`}>
-                <div className="font-normal">{user.user_metadata.full_name}</div>
-                <small className="text-gray-500">@{user.user_metadata.user_name}</small>
+                <div className="font-normal">
+                  {user.user_metadata.full_name}
+                </div>
+                <small className="text-gray-500">
+                  @{user.user_metadata.user_name}
+                </small>
               </Link>
             </li>
             {menuLinks.map((link, index) => (
@@ -153,7 +144,9 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
                 key={index}
                 onClick={() => setShowMenu(false)}
                 className={`cursor-pointer p-2 leading-relaxed transition-all hover:bg-gray-50 hover:text-blue-800 ${
-                  index === menuLinks.length - 1 ? "border-t border-gray-200" : ""
+                  index === menuLinks.length - 1
+                    ? "border-t border-gray-200"
+                    : ""
                 }`}
               >
                 <Link href={link.href}>{link.text}</Link>
