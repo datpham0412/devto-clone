@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import ArticleComponent from "~/components/ArticleComponent";
 import ArticleSkeleton from "~/components/ArticleSkeleton";
 import { trpc } from "~/utils/trpc";
-import type { Article } from "~/server/routers/articles";
+import type { Article } from "~/server/api/routers/articles";
 
 const Content: React.FC = () => {
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
@@ -13,7 +13,7 @@ const Content: React.FC = () => {
         limit: 10,
       },
       {
-        getNextPageParam: (lastPage) => lastPage.nextCursor,
+        getNextPageParam: (lastPage: any) => lastPage.nextCursor,
       },
     );
 
@@ -87,7 +87,7 @@ const Content: React.FC = () => {
           [1, 2, 3, 4, 5].map((a) => <ArticleSkeleton key={a} />)
         ) : (
           <>
-            {data?.pages.map((page, i) => (
+            {data?.pages.map((page: any, i: number) => (
               <React.Fragment key={i}>
                 {page.items.map((article: Article) => (
                   <ArticleComponent key={article.id} data={article} />
