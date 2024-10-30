@@ -1,56 +1,70 @@
 "use client";
 
-import { useState } from "react";
-import { supabase } from "~/lib/supabase";
+import { useState, useEffect } from "react";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      router.push("/");
+    }
+  }, [session, router]);
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
     setLoading(true);
+    setError(null);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const result = await signIn("credentials", {
         email,
         password,
+        redirect: false,
       });
 
-      if (error) throw error;
+      if (result?.error) {
+        setError(result.error);
+        return;
+      }
+
       router.push("/");
-      router.refresh();
     } catch (error) {
-      setError(error instanceof Error ? error.message : "An error occurred");
+      setError("An error occurred during sign in");
     } finally {
       setLoading(false);
     }
   };
 
   const handleGithubLogin = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "github",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-      },
-    });
+    setLoading(true);
+    try {
+      await signIn("github", {
+        callbackUrl: "/",
+      });
+    } catch (error) {
+      setError("Failed to sign in with GitHub");
+      setLoading(false);
+    }
   };
 
-  const handleGoogleLogin = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-      },
-    });
-  };
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  if (session) {
+    return null;
+  }
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
@@ -69,13 +83,13 @@ export default function SignIn() {
           </p>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleEmailLogin}>
-          {error && (
-            <div className="rounded-md bg-red-50 p-4">
-              <p className="text-sm text-red-700">{error}</p>
-            </div>
-          )}
+        {error && (
+          <div className="rounded-md bg-red-50 p-4">
+            <p className="text-sm text-red-700">{error}</p>
+          </div>
+        )}
 
+        <form className="mt-8 space-y-6" onSubmit={handleEmailLogin}>
           <div className="-space-y-px rounded-md shadow-sm">
             <div>
               <label htmlFor="email" className="sr-only">
@@ -131,7 +145,7 @@ export default function SignIn() {
           </div>
         </div>
 
-        <div className="mt-6 space-y-4">
+        <div className="mt-6">
           <button
             onClick={handleGithubLogin}
             className="flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
@@ -144,20 +158,6 @@ export default function SignIn() {
               className="mr-2"
             />
             Continue with GitHub
-          </button>
-
-          <button
-            onClick={handleGoogleLogin}
-            className="flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-          >
-            <Image
-              src="/icons/google-icon.png"
-              alt="Google"
-              width={20}
-              height={20}
-              className="mr-2"
-            />
-            Continue with Google
           </button>
         </div>
       </div>
