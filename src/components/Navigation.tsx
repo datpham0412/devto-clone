@@ -1,14 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaDev } from "react-icons/fa";
 import { BiMessageRoundedCheck } from "react-icons/bi";
 import { RiNotificationLine } from "react-icons/ri";
 import { FiSearch } from "react-icons/fi";
-import { supabase } from "~/lib/supabase";
-import type { User } from "@supabase/supabase-js";
+import { useSession, signOut } from "next-auth/react";
 
 interface NavigationProps {
   openMenu: () => void;
@@ -21,20 +20,10 @@ interface MenuLink {
 
 const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
   const [showMenu, setShowMenu] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
+  const { data: session, status } = useSession();
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
+    await signOut();
     setShowMenu(false);
   };
 
@@ -45,8 +34,14 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
     { text: "Settings", href: "/settings" },
   ];
 
-  const userAvatar = user?.user_metadata?.avatar_url as string | undefined;
+  const userAvatar = session?.user?.image;
   const avatarUrl = userAvatar ?? "https://picsum.photos/200";
+  const username = session?.user?.username;
+  const name = session?.user?.name;
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
 
   return (
     <header className="flex h-[56px] w-full max-w-full bg-white px-12 py-4">
@@ -58,7 +53,7 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
         />
 
         {/* Logo */}
-        <Link href="https://dev.to" className="flex items-center text-black">
+        <Link href="/" className="flex items-center text-black">
           <FaDev size="3.125rem" />
         </Link>
 
@@ -76,7 +71,7 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
 
         {/* Right Section */}
         <div className="ml-auto flex items-center">
-          {user ? (
+          {session ? (
             <>
               <button className="mr-2 rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
                 Write a post
@@ -126,17 +121,13 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
         </div>
       </div>
 
-      {showMenu && user && (
+      {showMenu && session && (
         <div className="absolute right-16 top-[56px] z-10 min-w-[250px] rounded-lg border-2 border-gray-900 bg-white shadow-[4px_4px_0_0_rgba(0,0,0,0.9)]">
           <ul>
             <li className="cursor-pointer border-b border-gray-200 p-3">
-              <Link href={`/user/${user.user_metadata.user_name}`}>
-                <div className="font-normal">
-                  {user.user_metadata.full_name}
-                </div>
-                <small className="text-gray-500">
-                  @{user.user_metadata.user_name}
-                </small>
+              <Link href={`/user/${username}`}>
+                <div className="font-normal">{name}</div>
+                <small className="text-gray-500">@{username}</small>
               </Link>
             </li>
             {menuLinks.map((link, index) => (
