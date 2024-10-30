@@ -1,15 +1,16 @@
-import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
-import { appRouter } from '~/server/routers/_app';
-import { createContext } from '~/server/context';
+import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
+import { appRouter } from "~/server/api/root";
+import { createTRPCContext } from "~/server/api/context";
 
-// The [trpc] in brackets means it's a dynamic route in Next.js
-// This file handles all tRPC API requests
 const handler = (req: Request) =>
   fetchRequestHandler({
-    endpoint: '/api/trpc',
+    endpoint: "/api/trpc",
     req,
     router: appRouter,
-    createContext: () => createContext({ req, resHeaders: new Headers() }),
+    createContext: async () => {
+      const resHeaders = new Headers();
+      return createTRPCContext({ req, resHeaders });
+    },
   });
 
-export { handler as GET, handler as POST }; 
+export { handler as GET, handler as POST };
