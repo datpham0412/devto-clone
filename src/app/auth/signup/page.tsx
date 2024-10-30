@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "~/lib/supabase";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -9,81 +9,54 @@ import { useRouter } from "next/navigation";
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  const handleSignUp = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
     setLoading(true);
+    setError(null);
 
     try {
-      console.log("Starting signup process...");
-
-      console.log("Signup request:", {
-        email,
-        username,
-        redirectTo: `${window.location.origin}/auth/callback`,
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+          name,
+          username,
+        }),
       });
 
-      const { data, error } = await supabase.auth.signUp({
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Something went wrong");
+      }
+
+      // Sign in after successful signup
+      const result = await signIn("credentials", {
         email,
         password,
-        options: {
-          data: { username },
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
-        },
+        redirect: false,
       });
 
-      console.log("Signup response:", data);
-      console.log("User data:", data?.user);
-
-      if (error) {
-        console.error("Signup error:", error);
-        throw error;
+      if (result?.error) {
+        throw new Error(result.error);
       }
 
-      if (data?.user && !data.user.confirmed_at) {
-        console.log("User created, awaiting email confirmation");
-        alert(
-          "Please check your email (including spam folder) to confirm your account! If you don't receive it within a few minutes, please try again.",
-        );
-      } else {
-        console.log("User created and auto-confirmed");
-        alert("Account created successfully!");
-      }
-
-      router.push("/auth/signin");
+      router.push("/");
     } catch (error) {
-      console.error("Error in signup:", error);
-      setError(
-        error instanceof Error
-          ? error.message
-          : "An error occurred during signup",
-      );
+      setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleGithubSignUp = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "github",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-      },
-    });
-  };
-
-  const handleGoogleSignUp = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-      },
-    });
   };
 
   return (
@@ -94,23 +67,35 @@ export default function SignUp() {
             Create your account
           </h2>
           <p className="mt-2 text-sm text-gray-600">
-            <Link
-              href="/auth/signin"
-              className="text-blue-600 hover:text-blue-500"
-            >
+            <Link href="/auth/signin" className="text-blue-600 hover:text-blue-500">
               Or sign in to your account
             </Link>
           </p>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleSignUp}>
-          {error && (
-            <div className="rounded-md bg-red-50 p-4">
-              <p className="text-sm text-red-700">{error}</p>
-            </div>
-          )}
+        {error && (
+          <div className="rounded-md bg-red-50 p-4">
+            <p className="text-sm text-red-700">{error}</p>
+          </div>
+        )}
 
-          <div className="-space-y-px rounded-md shadow-sm">
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          <div className="space-y-2">
+            <div>
+              <label htmlFor="name" className="sr-only">
+                Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                placeholder="Full name"
+              />
+            </div>
             <div>
               <label htmlFor="username" className="sr-only">
                 Username
@@ -122,7 +107,7 @@ export default function SignUp() {
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                 placeholder="Username"
               />
             </div>
@@ -137,7 +122,7 @@ export default function SignUp() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="relative block w-full border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                 placeholder="Email address"
               />
             </div>
@@ -152,9 +137,8 @@ export default function SignUp() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                 placeholder="Password"
-                minLength={6}
               />
             </div>
           </div>
@@ -169,47 +153,6 @@ export default function SignUp() {
             </button>
           </div>
         </form>
-
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-300" />
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="bg-gray-50 px-2 text-gray-500">
-              Or continue with
-            </span>
-          </div>
-        </div>
-
-        <div className="mt-6 space-y-4">
-          <button
-            onClick={handleGithubSignUp}
-            className="flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-          >
-            <Image
-              src="/icons/github-icon.png"
-              alt="GitHub"
-              width={20}
-              height={20}
-              className="mr-2"
-            />
-            Continue with GitHub
-          </button>
-
-          <button
-            onClick={handleGoogleSignUp}
-            className="flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-          >
-            <Image
-              src="/icons/google-icon.png"
-              alt="Google"
-              width={20}
-              height={20}
-              className="mr-2"
-            />
-            Continue with Google
-          </button>
-        </div>
       </div>
     </div>
   );
