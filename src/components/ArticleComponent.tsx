@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { BiHeart } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa";
@@ -13,7 +12,7 @@ dayjs.extend(relativeTime);
 interface ArticleProps {
   data: {
     title: string;
-    cover_image: string;
+    cover_image: string | null;
     tag_list: string[];
     url: string;
     comments_count: number;
