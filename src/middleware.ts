@@ -1,35 +1,27 @@
-import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
+import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
 
-export async function middleware(req: NextRequest) {
-  const res = NextResponse.next();
-  const supabase = createMiddlewareClient({ req, res });
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  if (!session && req.nextUrl.pathname.startsWith("/protected")) {
-    return NextResponse.redirect(new URL("/auth/signin", req.url));
-  }
-
-  if (
-    session &&
-    (req.nextUrl.pathname === "/auth/signin" ||
-      req.nextUrl.pathname === "/auth/signup")
-  ) {
-    return NextResponse.redirect(new URL("/", req.url));
-  }
-
-  return res;
-}
+export default withAuth(
+  function middleware(req) {
+    if (req.nextUrl.pathname.startsWith("/auth/signin")) {
+      if (req.nextauth.token) {
+        return NextResponse.redirect(new URL("/", req.url));
+      }
+    }
+    return NextResponse.next();
+  },
+  {
+    callbacks: {
+      authorized: ({ token, req }) => {
+        if (req.nextUrl.pathname.startsWith("/protected")) {
+          return !!token;
+        }
+        return true;
+      },
+    },
+  },
+);
 
 export const config = {
-  matcher: [
-    "/protected/:path*",
-    "/auth/signin",
-    "/auth/signup",
-    "/auth/callback",
-  ],
+  matcher: ["/protected/:path*", "/auth/signin", "/auth/signup"],
 };
