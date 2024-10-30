@@ -1,84 +1,38 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ArticleComponent from "~/components/ArticleComponent";
 import ArticleSkeleton from "~/components/ArticleSkeleton";
-
-interface Article {
-  id: number;
-  title: string;
-  cover_image: string;
-  tag_list: string[];
-  url: string;
-  comments_count: number;
-  positive_reactions_count: number;
-  public_reactions_count: number;
-  user: {
-    username: string;
-    profile_image_90: string;
-  };
-  published_at: string;
-}
+import { trpc } from "~/utils/trpc";
+import type { Article } from "~/server/routers/articles";
 
 const Content: React.FC = () => {
-  const [articles, setArticles] = useState<Article[] | null>(null);
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [initialLoading, setInitialLoading] = useState(true);
-
-  const fetchArticles = async (pageNum: number) => {
-    try {
-      const res = await fetch(`https://dev.to/api/articles?page=${pageNum}`);
-      const data = (await res.json()) as Article[];
-      return data;
-    } catch (error) {
-      console.error("Error fetching articles:", error);
-      return null;
-    }
-  };
-
-  useEffect(() => {
-    const fetchInitialArticles = async () => {
-      const data = await fetchArticles(1);
-      if (data) {
-        setArticles(data);
-      }
-      setInitialLoading(false);
-    };
-
-    void setTimeout(() => {
-      void fetchInitialArticles();
-    }, 2000);
-  }, []);
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    trpc.articles.infiniteArticles.useInfiniteQuery(
+      {
+        limit: 10,
+      },
+      {
+        getNextPageParam: (lastPage) => lastPage.nextCursor,
+      },
+    );
 
   useEffect(() => {
     const handleScroll = () => {
-      if (loading) return;
+      if (isFetchingNextPage || !hasNextPage) return;
 
       const scrollTop = window.scrollY;
       const scrollHeight = document.documentElement.scrollHeight;
       const clientHeight = document.documentElement.clientHeight;
 
       if (scrollTop + clientHeight >= scrollHeight - 300) {
-        void (async () => {
-          setLoading(true);
-          const nextPage = page + 1;
-          const newArticles = await fetchArticles(nextPage);
-
-          if (newArticles && newArticles.length > 0) {
-            setArticles((prev) =>
-              prev ? [...prev, ...newArticles] : newArticles,
-            );
-            setPage(nextPage);
-          }
-          setLoading(false);
-        })();
+        void fetchNextPage();
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [loading, page]);
+  }, [isFetchingNextPage, hasNextPage, fetchNextPage]);
 
   return (
     <main>
@@ -129,18 +83,20 @@ const Content: React.FC = () => {
         </select>
       </header>
       <div>
-        {initialLoading ? (
-          // Initial loading skeletons
+        {isLoading ? (
           [1, 2, 3, 4, 5].map((a) => <ArticleSkeleton key={a} />)
         ) : (
           <>
-            {articles?.map((article) => (
-              <ArticleComponent key={article.id} data={article} />
+            {data?.pages.map((page, i) => (
+              <React.Fragment key={i}>
+                {page.items.map((article: Article) => (
+                  <ArticleComponent key={article.id} data={article} />
+                ))}
+              </React.Fragment>
             ))}
-            {/* Loading more indicator */}
-            {loading && (
+            {isFetchingNextPage && (
               <div className="flex justify-center py-4">
-                <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-600 border-t-transparent"></div>
+                <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
               </div>
             )}
           </>
