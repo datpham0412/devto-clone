@@ -81,12 +81,13 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         DEV Community is a community of 2,290,348 amazing developers
       </h2>
       <p className="mb-4 text-gray-600">
-        We're a place where coders share, stay up-to-date and grow their careers.
+        We're a place where coders share, stay up-to-date and grow their
+        careers.
       </p>
       <div className="flex flex-col gap-2">
         <Link
           href="/auth/signup"
-          className="flex w-full justify-center rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+          className="c-cta c-cta--branded mr-2 flex w-full items-center justify-center whitespace-nowrap rounded-lg border border-[#3B49DF] px-5 py-2 text-lg text-[#3B49DF] hover:bg-[#3B49DF] hover:text-white"
           data-tracking-id="ca_left_sidebar_home_page"
           data-tracking-source="left_sidebar"
         >
@@ -94,7 +95,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         </Link>
         <Link
           href="/auth/signin"
-          className="flex w-full justify-center rounded-lg px-4 py-2 text-blue-600 hover:bg-blue-50 hover:text-blue-700"
+          className="flex w-full items-center justify-center rounded-lg px-5 py-2 text-lg text-gray-600 hover:bg-gray-50 hover:text-gray-700"
         >
           Log in
         </Link>
@@ -240,14 +241,18 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
     <>
       <aside className="hidden w-[240px] lg:block">
         {!session && <LoginCard />}
-        
+
         <nav className="sticky top-2 px-2">
           <MenuLinks />
         </nav>
 
         <div className={`mt-4 flex p-2 ${more ? "block" : "hidden"}`}>
           {socialLinks.map(({ Icon, url }, index) => (
-            <Link key={index} href={url} className={sidebarLinkStyles.socialIcon}>
+            <Link
+              key={index}
+              href={url}
+              className={sidebarLinkStyles.socialIcon}
+            >
               <Icon />
             </Link>
           ))}
