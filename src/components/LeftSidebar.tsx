@@ -22,6 +22,12 @@ import { RiInstagramFill, RiTwitchLine } from "react-icons/ri";
 import { CgShapeHexagon } from "react-icons/cg";
 import { GrFormClose } from "react-icons/gr";
 import type { IconType } from "react-icons";
+import { BsBookmarkHeart } from "react-icons/bs";
+import { HiOutlineLightBulb } from "react-icons/hi";
+import { BiPurchaseTag } from "react-icons/bi";
+import { FiBox } from "react-icons/fi";
+import { CgShoppingBag } from "react-icons/cg";
+import { RiFileList3Line } from "react-icons/ri";
 
 const tags = [
   "react",
@@ -66,170 +72,184 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
   const toggle = () => setMore(!more);
 
   const MenuLinks = () => (
-    <ul>
-      <li>
-        <Link
-          href="/home"
-          className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 hover:text-blue-800"
-        >
-          <i className="pr-2 text-xl">
-            <FcHome />
-          </i>
-          Home
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/reading"
-          className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 hover:text-blue-800"
-        >
-          <i className="pr-2 text-xl">
-            <FcReading />
-          </i>
-          Reading List
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/list"
-          className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 hover:text-blue-800"
-        >
-          <i className="pr-2 text-xl">
-            <FcTodoList />
-          </i>
-          List
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/podcast"
-          className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 hover:text-blue-800"
-        >
-          <i className="pr-2 text-xl">
-            <AiFillAudio />
-          </i>
-          Podcasts
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/videos"
-          className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 hover:text-blue-800"
-        >
-          <i className="pr-2 text-xl">
-            <FcVideoCall />
-          </i>
-          Videos
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/tags"
-          className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 hover:text-blue-800"
-        >
-          <i className="pr-2 text-xl">
-            <FaTags />
-          </i>
-          Tags
-        </Link>
-      </li>
-      <li className={more ? "hidden" : "text-sm"}>
-        <Link href="/#" onClick={toggle} className="pl-8 text-gray-700">
-          More...
-        </Link>
-      </li>
+    <>
+      <ul className="space-y-1">
+        <li>
+          <Link
+            href="/home"
+            className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
+          >
+            <i className="pr-2 text-[1.15rem]">
+              <FcHome />
+            </i>
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/devplus"
+            className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
+          >
+            <i className="pr-2 text-[1.15rem] text-indigo-600">
+              <FiBox />
+            </i>
+            DEV++
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/reading"
+            className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
+          >
+            <i className="pr-2 text-[1.15rem]">
+              <BsBookmarkHeart />
+            </i>
+            Reading List
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/podcast"
+            className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
+          >
+            <i className="pr-2 text-[1.15rem]">
+              <AiFillAudio />
+            </i>
+            Podcasts
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/videos"
+            className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
+          >
+            <i className="pr-2 text-[1.15rem]">
+              <FcVideoCall />
+            </i>
+            Videos
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/tags"
+            className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
+          >
+            <i className="pr-2 text-[1.15rem]">
+              <BiPurchaseTag />
+            </i>
+            Tags
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/help"
+            className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
+          >
+            <i className="pr-2 text-[1.15rem]">
+              <HiOutlineLightBulb />
+            </i>
+            DEV Help
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/shop"
+            className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
+          >
+            <i className="pr-2 text-[1.15rem]">
+              <CgShoppingBag />
+            </i>
+            Forem Shop
+          </Link>
+        </li>
+      </ul>
 
       <div className={more ? "block" : "hidden"}>
-        <li>
-          <Link
-            href="/code"
-            className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 hover:text-blue-800"
-          >
-            <i className="pr-2 text-xl">
-              <FcAbout />
-            </i>
-            Code of Conduct
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/FAQ"
-            className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 hover:text-blue-800"
-          >
-            <i className="pr-2 text-xl">
-              <FcIdea />
-            </i>
-            FAQ
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/DEV"
-            className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 hover:text-blue-800"
-          >
-            <i className="pr-2 text-xl">
-              <FcShop />
-            </i>
-            DEV Shop
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/sponsers"
-            className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 hover:text-blue-800"
-          >
-            <i className="pr-2 text-xl">
-              <FcLike />
-            </i>
-            Sponsers
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/about"
-            className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 hover:text-blue-800"
-          >
-            <i className="pr-2 text-xl">
-              <FaDev />
-            </i>
-            About
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/privacy"
-            className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 hover:text-blue-800"
-          >
-            <i className="pr-2 text-xl">
-              <FcBriefcase />
-            </i>
-            Privacy Policy
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/terms"
-            className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 hover:text-blue-800"
-          >
-            <i className="pr-2 text-xl">
-              <FcDisclaimer />
-            </i>
-            Terms of use
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/contact"
-            className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 hover:text-blue-800"
-          >
-            <i className="pr-2 text-xl">
-              <FcBusinessContact />
-            </i>
-            Contact
-          </Link>
-        </li>
+        <div className="my-2 border-t border-gray-100" />
+        <ul className="space-y-1">
+          <li>
+            <Link
+              href="/advertise"
+              className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
+            >
+              <i className="pr-2 text-[1.15rem]">
+                <FcLike />
+              </i>
+              Advertise on DEV
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/about"
+              className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
+            >
+              <i className="pr-2 text-[1.15rem]">
+                <FaDev />
+              </i>
+              About
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/contact"
+              className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
+            >
+              <i className="pr-2 text-[1.15rem]">
+                <FcBusinessContact />
+              </i>
+              Contact
+            </Link>
+          </li>
+        </ul>
+
+        <div className="my-2 border-t border-gray-100" />
+        <h3 className="px-4 py-2 text-xs font-bold uppercase text-gray-700">
+          Other
+        </h3>
+        <ul className="space-y-1">
+          <li>
+            <Link
+              href="/code"
+              className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
+            >
+              <i className="pr-2 text-[1.15rem]">
+                <RiFileList3Line />
+              </i>
+              Code of Conduct
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/privacy"
+              className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
+            >
+              <i className="pr-2 text-[1.15rem]">
+                <FcBriefcase />
+              </i>
+              Privacy Policy
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/terms"
+              className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
+            >
+              <i className="pr-2 text-[1.15rem]">
+                <FcDisclaimer />
+              </i>
+              Terms of use
+            </Link>
+          </li>
+        </ul>
       </div>
-    </ul>
+
+      <button
+        onClick={toggle}
+        className="mt-1 px-4 py-2 text-sm text-gray-700 hover:text-blue-700 font-medium"
+      >
+        {more ? "Less..." : "More..."}
+      </button>
+    </>
   );
 
   return (
@@ -253,7 +273,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
 
         <nav>
           <header className="flex items-center justify-between p-2">
-            <h3 className="text-base">My Tags</h3>
+            <h3 className="text-base font-bold">My Tags</h3>
             <i className="cursor-pointer rounded-lg p-2 text-2xl text-gray-600 hover:bg-gray-100 hover:text-gray-900">
               <CgShapeHexagon />
             </i>
@@ -262,7 +282,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
             {tags.map((tag, id) => (
               <li
                 key={id}
-                className="cursor-pointer rounded-lg p-2 hover:bg-gray-100 hover:text-blue-800"
+                className="cursor-pointer rounded-lg p-2 hover:bg-gray-100 hover:text-blue-800 font-medium"
               >
                 <Link href={`/#${tag}`}>#{tag}</Link>
               </li>
