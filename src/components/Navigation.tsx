@@ -44,8 +44,8 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
   }
 
   return (
-    <header className="flex h-[56px] w-full max-w-full bg-white px-12 py-4">
-      <div className="flex w-full max-w-[1280px] items-center">
+    <header className="flex h-[56px] w-full bg-white border-b border-gray-200">
+      <div className="mx-auto flex w-full max-w-[1280px] items-center px-2">
         {/* Hamburger Menu */}
         <div
           onClick={openMenu}
