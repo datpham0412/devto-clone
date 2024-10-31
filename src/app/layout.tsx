@@ -1,12 +1,16 @@
 import "./globals.css";
-import { GeistSans } from "geist/font/sans";
-import { type Metadata } from "next";
+import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 
-export const metadata: Metadata = {
-  title: "DevTo Clone",
-  description: "A clone of dev.to built with Next.js and T3 Stack",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-inter",
+});
+
+export const metadata = {
+  title: "DEV Community",
+  description: "A constructive and inclusive social network for software developers. With you every step of your journey.",
 };
 
 export default function RootLayout({
@@ -15,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={GeistSans.variable}>
-      <body>
+    <html lang="en">
+      <body className={`${inter.variable} font-sans antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>
