@@ -242,7 +242,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
       <aside className="hidden w-[240px] lg:block">
         {!session && <LoginCard />}
 
-        <nav className="sticky top-2 px-2">
+        <nav className="px-2">
           <MenuLinks />
         </nav>
 
@@ -265,9 +265,9 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
               <CgShapeHexagon />
             </i>
           </header>
-          <ul className="mr-3 h-[40vh] overflow-y-auto leading-relaxed">
+          <ul className="mr-3 h-[40vh] space-y-2 overflow-y-auto leading-loose">
             {tags.map((tag, id) => (
-              <li key={id} className={sidebarLinkStyles.tagItem}>
+              <li key={id} className={`${sidebarLinkStyles.tagItem} py-1`}>
                 <Link href={`/#${tag}`}>#{tag}</Link>
               </li>
             ))}

@@ -58,7 +58,7 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
         </Link>
 
         {/* Search Box */}
-        <div className="relative mx-4 max-w-[840px] flex-1">
+        <div className="relative mx-4 max-w-[700px] flex-1">
           <form className="relative">
             <input
               type="text"
