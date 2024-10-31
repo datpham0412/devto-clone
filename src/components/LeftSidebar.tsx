@@ -30,6 +30,7 @@ import { CgShoppingBag } from "react-icons/cg";
 import { RiFileList3Line } from "react-icons/ri";
 import { HomeIcon } from "~/components/icons/HomeIcon";
 import { sidebarLinkStyles } from "~/styles/sidebar";
+import { useSession } from "next-auth/react";
 
 const tags = [
   "react",
@@ -71,7 +72,35 @@ const socialLinks: SocialLink[] = [
 
 const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
   const [more, setMore] = useState(false);
+  const { data: session } = useSession();
   const toggle = () => setMore(!more);
+
+  const LoginCard = () => (
+    <div className="mb-4 rounded-lg border border-gray-200 bg-white p-4">
+      <h2 className="mb-4 text-xl font-bold leading-tight">
+        DEV Community is a community of 2,290,348 amazing developers
+      </h2>
+      <p className="mb-4 text-gray-600">
+        We're a place where coders share, stay up-to-date and grow their careers.
+      </p>
+      <div className="flex flex-col gap-2">
+        <Link
+          href="/auth/signup"
+          className="flex w-full justify-center rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+          data-tracking-id="ca_left_sidebar_home_page"
+          data-tracking-source="left_sidebar"
+        >
+          Create account
+        </Link>
+        <Link
+          href="/auth/signin"
+          className="flex w-full justify-center rounded-lg px-4 py-2 text-blue-600 hover:bg-blue-50 hover:text-blue-700"
+        >
+          Log in
+        </Link>
+      </div>
+    </div>
+  );
 
   const MenuLinks = () => (
     <>
@@ -209,12 +238,14 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
 
   return (
     <>
-      <aside>
-        <nav>
+      <aside className="hidden w-[240px] lg:block">
+        {!session && <LoginCard />}
+        
+        <nav className="sticky top-2 px-2">
           <MenuLinks />
         </nav>
 
-        <div className={`mt-4 flex p-4 ${more ? "block" : "hidden"}`}>
+        <div className={`mt-4 flex p-2 ${more ? "block" : "hidden"}`}>
           {socialLinks.map(({ Icon, url }, index) => (
             <Link key={index} href={url} className={sidebarLinkStyles.socialIcon}>
               <Icon />
@@ -222,7 +253,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
           ))}
         </div>
 
-        <nav>
+        <nav className="px-2">
           <header className="flex items-center justify-between p-2">
             <h3 className={sidebarLinkStyles.tagHeader}>My Tags</h3>
             <i className="cursor-pointer rounded-lg p-2 text-2xl text-gray-600 hover:bg-gray-100 hover:text-gray-900">
