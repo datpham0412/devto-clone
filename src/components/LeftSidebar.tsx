@@ -28,6 +28,8 @@ import { BiPurchaseTag } from "react-icons/bi";
 import { FiBox } from "react-icons/fi";
 import { CgShoppingBag } from "react-icons/cg";
 import { RiFileList3Line } from "react-icons/ri";
+import { HomeIcon } from "~/components/icons/HomeIcon";
+import { sidebarLinkStyles } from "~/styles/sidebar";
 
 const tags = [
   "react",
@@ -75,88 +77,64 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
     <>
       <ul className="space-y-1">
         <li>
-          <Link
-            href="/home"
-            className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
-          >
-            <i className="pr-2 text-[1.15rem]">
-              <FcHome />
+          <Link href="/home" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
+              <HomeIcon />
             </i>
             Home
           </Link>
         </li>
         <li>
-          <Link
-            href="/devplus"
-            className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
-          >
-            <i className="pr-2 text-[1.15rem] text-indigo-600">
+          <Link href="/devplus" className={sidebarLinkStyles.default}>
+            <i className={`${sidebarLinkStyles.icon} text-indigo-600`}>
               <FiBox />
             </i>
             DEV++
           </Link>
         </li>
         <li>
-          <Link
-            href="/reading"
-            className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
-          >
-            <i className="pr-2 text-[1.15rem]">
+          <Link href="/reading" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
               <BsBookmarkHeart />
             </i>
             Reading List
           </Link>
         </li>
         <li>
-          <Link
-            href="/podcast"
-            className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
-          >
-            <i className="pr-2 text-[1.15rem]">
+          <Link href="/podcast" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
               <AiFillAudio />
             </i>
             Podcasts
           </Link>
         </li>
         <li>
-          <Link
-            href="/videos"
-            className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
-          >
-            <i className="pr-2 text-[1.15rem]">
+          <Link href="/videos" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
               <FcVideoCall />
             </i>
             Videos
           </Link>
         </li>
         <li>
-          <Link
-            href="/tags"
-            className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
-          >
-            <i className="pr-2 text-[1.15rem]">
+          <Link href="/tags" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
               <BiPurchaseTag />
             </i>
             Tags
           </Link>
         </li>
         <li>
-          <Link
-            href="/help"
-            className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
-          >
-            <i className="pr-2 text-[1.15rem]">
+          <Link href="/help" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
               <HiOutlineLightBulb />
             </i>
             DEV Help
           </Link>
         </li>
         <li>
-          <Link
-            href="/shop"
-            className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
-          >
-            <i className="pr-2 text-[1.15rem]">
+          <Link href="/shop" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
               <CgShoppingBag />
             </i>
             Forem Shop
@@ -165,36 +143,27 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
       </ul>
 
       <div className={more ? "block" : "hidden"}>
-        <div className="my-2 border-t border-gray-100" />
+        <div className={sidebarLinkStyles.divider} />
         <ul className="space-y-1">
           <li>
-            <Link
-              href="/advertise"
-              className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
-            >
-              <i className="pr-2 text-[1.15rem]">
+            <Link href="/advertise" className={sidebarLinkStyles.default}>
+              <i className={sidebarLinkStyles.icon}>
                 <FcLike />
               </i>
               Advertise on DEV
             </Link>
           </li>
           <li>
-            <Link
-              href="/about"
-              className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
-            >
-              <i className="pr-2 text-[1.15rem]">
+            <Link href="/about" className={sidebarLinkStyles.default}>
+              <i className={sidebarLinkStyles.icon}>
                 <FaDev />
               </i>
               About
             </Link>
           </li>
           <li>
-            <Link
-              href="/contact"
-              className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
-            >
-              <i className="pr-2 text-[1.15rem]">
+            <Link href="/contact" className={sidebarLinkStyles.default}>
+              <i className={sidebarLinkStyles.icon}>
                 <FcBusinessContact />
               </i>
               Contact
@@ -202,39 +171,28 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
           </li>
         </ul>
 
-        <div className="my-2 border-t border-gray-100" />
-        <h3 className="px-4 py-2 text-xs font-bold uppercase text-gray-700">
-          Other
-        </h3>
+        <div className={sidebarLinkStyles.divider} />
+        <h3 className={sidebarLinkStyles.sectionHeader}>Other</h3>
         <ul className="space-y-1">
           <li>
-            <Link
-              href="/code"
-              className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
-            >
-              <i className="pr-2 text-[1.15rem]">
+            <Link href="/code" className={sidebarLinkStyles.default}>
+              <i className={sidebarLinkStyles.icon}>
                 <RiFileList3Line />
               </i>
               Code of Conduct
             </Link>
           </li>
           <li>
-            <Link
-              href="/privacy"
-              className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
-            >
-              <i className="pr-2 text-[1.15rem]">
+            <Link href="/privacy" className={sidebarLinkStyles.default}>
+              <i className={sidebarLinkStyles.icon}>
                 <FcBriefcase />
               </i>
               Privacy Policy
             </Link>
           </li>
           <li>
-            <Link
-              href="/terms"
-              className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-700 font-medium"
-            >
-              <i className="pr-2 text-[1.15rem]">
+            <Link href="/terms" className={sidebarLinkStyles.default}>
+              <i className={sidebarLinkStyles.icon}>
                 <FcDisclaimer />
               </i>
               Terms of use
@@ -243,10 +201,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         </ul>
       </div>
 
-      <button
-        onClick={toggle}
-        className="mt-1 px-4 py-2 text-sm text-gray-700 hover:text-blue-700 font-medium"
-      >
+      <button onClick={toggle} className={sidebarLinkStyles.moreButton}>
         {more ? "Less..." : "More..."}
       </button>
     </>
@@ -261,11 +216,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
 
         <div className={`mt-4 flex p-4 ${more ? "block" : "hidden"}`}>
           {socialLinks.map(({ Icon, url }, index) => (
-            <Link
-              key={index}
-              href={url}
-              className="mx-2 text-2xl text-gray-600 hover:text-gray-900"
-            >
+            <Link key={index} href={url} className={sidebarLinkStyles.socialIcon}>
               <Icon />
             </Link>
           ))}
@@ -273,17 +224,14 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
 
         <nav>
           <header className="flex items-center justify-between p-2">
-            <h3 className="text-base font-bold">My Tags</h3>
+            <h3 className={sidebarLinkStyles.tagHeader}>My Tags</h3>
             <i className="cursor-pointer rounded-lg p-2 text-2xl text-gray-600 hover:bg-gray-100 hover:text-gray-900">
               <CgShapeHexagon />
             </i>
           </header>
           <ul className="mr-3 h-[40vh] overflow-y-auto leading-relaxed">
             {tags.map((tag, id) => (
-              <li
-                key={id}
-                className="cursor-pointer rounded-lg p-2 hover:bg-gray-100 hover:text-blue-800 font-medium"
-              >
+              <li key={id} className={sidebarLinkStyles.tagItem}>
                 <Link href={`/#${tag}`}>#{tag}</Link>
               </li>
             ))}
