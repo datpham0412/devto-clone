@@ -76,18 +76,18 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
   const toggle = () => setMore(!more);
 
   const LoginCard = () => (
-    <div className="mb-4 rounded-lg border border-gray-200 bg-white p-4">
-      <h2 className="mb-4 text-xl font-bold leading-tight">
+    <div className="mb-4 rounded-lg border border-gray-200 bg-white p-6">
+      <h2 className="mb-6 text-2xl font-bold leading-tight">
         DEV Community is a community of 2,290,348 amazing developers
       </h2>
-      <p className="mb-4 text-gray-600">
+      <p className="mb-6 text-lg text-gray-600">
         We're a place where coders share, stay up-to-date and grow their
         careers.
       </p>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         <Link
           href="/auth/signup"
-          className="c-cta c-cta--branded mr-2 flex w-full items-center justify-center whitespace-nowrap rounded-lg border border-[#3B49DF] px-5 py-2 text-lg text-[#3B49DF] hover:bg-[#3B49DF] hover:text-white"
+          className="c-cta c-cta--branded mr-2 flex w-full items-center justify-center whitespace-nowrap rounded-lg border border-[#3B49DF] px-3 py-1.5 text-lg text-[#3B49DF] hover:bg-[#3B49DF] hover:text-white"
           data-tracking-id="ca_left_sidebar_home_page"
           data-tracking-source="left_sidebar"
         >
@@ -95,7 +95,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         </Link>
         <Link
           href="/auth/signin"
-          className="flex w-full items-center justify-center rounded-lg px-5 py-2 text-lg text-gray-600 hover:bg-gray-50 hover:text-gray-700"
+          className="flex w-full items-center justify-center rounded-lg px-3 py-1.5 text-lg text-gray-600 hover:bg-gray-50 hover:text-gray-700"
         >
           Log in
         </Link>
@@ -239,7 +239,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
 
   return (
     <>
-      <aside className="hidden w-[240px] lg:block">
+      <aside className="hidden w-[275px] lg:block">
         {!session && <LoginCard />}
 
         <nav className="px-2">

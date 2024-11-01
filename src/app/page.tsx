@@ -28,7 +28,7 @@ function HomeClient() {
         </div>
       </div>
       <div className="mx-auto max-w-[1500px] py-3">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-[240px_1fr] lg:grid-cols-[240px_2fr_1fr]">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-[275px_1fr_275px] lg:grid-cols-[275px_1fr_275px]">
           <div className="hidden md:block">
             <LeftSidebar burgerMenu={isBurgerMenuOpen} closeMenu={closeMenu} />
           </div>
