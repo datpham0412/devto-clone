@@ -24,6 +24,7 @@ import { DevPlusIcon } from "~/components/icons/DevPlusIcon";
 import { PodcastIcon } from "~/components/icons/PodcastIcon";
 import { VideoIcon } from "~/components/icons/VideoIcon";
 import { TagIcon } from "~/components/icons/TagIcon";
+import { HelpIcon } from "~/components/icons/HelpIcon";
 
 const tags = [
   "react",
@@ -145,7 +146,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         <li>
           <Link href="/help" className={sidebarLinkStyles.default}>
             <i className={sidebarLinkStyles.icon}>
-              <HiOutlineLightBulb />
+              <HelpIcon />
             </i>
             DEV Help
           </Link>
