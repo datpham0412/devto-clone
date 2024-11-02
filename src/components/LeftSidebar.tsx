@@ -32,6 +32,7 @@ import { HomeIcon } from "~/components/icons/HomeIcon";
 import { sidebarLinkStyles } from "~/styles/sidebar";
 import { useSession } from "next-auth/react";
 import { DevPlusIcon } from "~/components/icons/DevPlusIcon";
+import { PodcastIcon } from "~/components/icons/PodcastIcon";
 
 const tags = [
   "react",
@@ -129,7 +130,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         <li>
           <Link href="/podcast" className={sidebarLinkStyles.default}>
             <i className={sidebarLinkStyles.icon}>
-              <AiFillAudio />
+              <PodcastIcon />
             </i>
             Podcasts
           </Link>
