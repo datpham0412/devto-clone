@@ -76,11 +76,11 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
   const toggle = () => setMore(!more);
 
   const LoginCard = () => (
-    <div className="mb-4 rounded-lg border border-gray-200 bg-white p-6">
-      <h2 className="mb-6 text-2xl font-bold leading-tight">
-        DEV Community is a community of 2,290,348 amazing developers
+    <div className="mb-4 rounded-lg border border-gray-200 bg-white p-4">
+      <h2 className="mb-4 text-xl font-bold leading-tight">
+        DEV Community is a community of 2,298,425 amazing developers
       </h2>
-      <p className="mb-6 text-lg text-gray-600">
+      <p className="mb-4 text-base text-gray-600">
         We're a place where coders share, stay up-to-date and grow their
         careers.
       </p>
@@ -95,7 +95,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         </Link>
         <Link
           href="/auth/signin"
-          className="flex w-full items-center justify-center rounded-lg px-3 py-1.5 text-lg text-gray-600 hover:bg-gray-50 hover:text-gray-700"
+          className="flex w-full items-center justify-center rounded-lg px-3 py-1.5 text-base text-gray-600 hover:bg-gray-50 hover:text-gray-700"
         >
           Log in
         </Link>
@@ -239,7 +239,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
 
   return (
     <>
-      <aside className="hidden w-[275px] lg:block">
+      <aside className="hidden w-[240px] lg:block">
         {!session && <LoginCard />}
 
         <nav className="px-2">
