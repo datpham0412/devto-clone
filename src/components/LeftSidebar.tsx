@@ -3,19 +3,15 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import {
-  FcLike,
   FcBriefcase,
   FcDisclaimer,
   FcBusinessContact,
 } from "react-icons/fc";
-import { FaDev } from "react-icons/fa";
 import { IoLogoTwitter, IoLogoFacebook, IoLogoGithub } from "react-icons/io";
 import { RiInstagramFill, RiTwitchLine } from "react-icons/ri";
 import { CgShapeHexagon } from "react-icons/cg";
 import { GrFormClose } from "react-icons/gr";
 import type { IconType } from "react-icons";
-import { HiOutlineLightBulb } from "react-icons/hi";
-import { CgShoppingBag } from "react-icons/cg";
 import { RiFileList3Line } from "react-icons/ri";
 import { HomeIcon } from "~/components/icons/HomeIcon";
 import { sidebarLinkStyles } from "~/styles/sidebar";
@@ -30,6 +26,10 @@ import { AdvertiseIcon } from "~/components/icons/AdvertiseIcon";
 import { ChallengesIcon } from "~/components/icons/ChallengesIcon";
 import { ShowcaseIcon } from "~/components/icons/ShowcaseIcon";
 import { AboutIcon } from "~/components/icons/AboutIcon";
+import { ContactIcon } from "~/components/icons/ContactIcon";
+import { PostgresIcon } from "~/components/icons/PostgresIcon";
+import { GuideIcon } from "~/components/icons/GuideIcon";
+import { SoftwareComparisonIcon } from "~/components/icons/SoftwareComparisonIcon";
 
 const tags = [
   "react",
@@ -199,9 +199,33 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         <li>
           <Link href="/contact" className={sidebarLinkStyles.default}>
             <i className={sidebarLinkStyles.icon}>
-              <FcBusinessContact />
+              <ContactIcon />
             </i>
             Contact
+          </Link>
+        </li>
+        <li>
+          <Link href="/postgres" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
+              <PostgresIcon />
+            </i>
+            Free Postgres Database
+          </Link>
+        </li>
+        <li>
+          <Link href="/guides" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
+              <GuideIcon />
+            </i>
+            Guides
+          </Link>
+        </li>
+        <li>
+          <Link href="/comparisons" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
+              <SoftwareComparisonIcon />
+            </i>
+            Software Comparisons
           </Link>
         </li>
 
