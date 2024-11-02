@@ -77,7 +77,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
       <h2 className="mb-4 text-xl font-bold leading-tight">
         DEV Community is a community of 2,298,425 amazing developers
       </h2>
-      <p className="mb-4 text-base text-gray-600">
+      <p className="mb-4 text-base text-gray-600 font-normal">
         We're a place where coders share, stay up-to-date and grow their
         careers.
       </p>
@@ -269,11 +269,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
     <>
       <aside className="hidden w-[240px] lg:block">
         {!session && <LoginCard />}
-
-        <nav className="px-2">
           <MenuLinks />
-        </nav>
-
         <div className="mt-4 flex p-2">
           {socialLinks.map(({ Icon, url }, index) => (
             <Link
