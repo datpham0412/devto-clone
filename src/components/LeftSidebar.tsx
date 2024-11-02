@@ -33,6 +33,7 @@ import { sidebarLinkStyles } from "~/styles/sidebar";
 import { useSession } from "next-auth/react";
 import { DevPlusIcon } from "~/components/icons/DevPlusIcon";
 import { PodcastIcon } from "~/components/icons/PodcastIcon";
+import { VideoIcon } from "~/components/icons/VideoIcon";
 
 const tags = [
   "react",
@@ -138,7 +139,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         <li>
           <Link href="/videos" className={sidebarLinkStyles.default}>
             <i className={sidebarLinkStyles.icon}>
-              <FcVideoCall />
+              <VideoIcon />
             </i>
             Videos
           </Link>
