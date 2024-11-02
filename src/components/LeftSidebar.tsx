@@ -25,6 +25,7 @@ import { PodcastIcon } from "~/components/icons/PodcastIcon";
 import { VideoIcon } from "~/components/icons/VideoIcon";
 import { TagIcon } from "~/components/icons/TagIcon";
 import { HelpIcon } from "~/components/icons/HelpIcon";
+import { ShopIcon } from "~/components/icons/ShopIcon";
 
 const tags = [
   "react",
@@ -154,7 +155,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         <li>
           <Link href="/shop" className={sidebarLinkStyles.default}>
             <i className={sidebarLinkStyles.icon}>
-              <CgShoppingBag />
+              <ShopIcon />
             </i>
             Forem Shop
           </Link>
