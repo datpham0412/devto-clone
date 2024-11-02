@@ -28,6 +28,8 @@ import { HelpIcon } from "~/components/icons/HelpIcon";
 import { ShopIcon } from "~/components/icons/ShopIcon";
 import { AdvertiseIcon } from "~/components/icons/AdvertiseIcon";
 import { ChallengesIcon } from "~/components/icons/ChallengesIcon";
+import { ShowcaseIcon } from "~/components/icons/ShowcaseIcon";
+import { AboutIcon } from "~/components/icons/AboutIcon";
 
 const tags = [
   "react",
@@ -179,9 +181,17 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
           </Link>
         </li>
         <li>
+          <Link href="/showcase" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
+              <ShowcaseIcon />
+            </i>
+            DEV Showcase
+          </Link>
+        </li>
+        <li>
           <Link href="/about" className={sidebarLinkStyles.default}>
             <i className={sidebarLinkStyles.icon}>
-              <FaDev />
+              <AboutIcon />
             </i>
             About
           </Link>
