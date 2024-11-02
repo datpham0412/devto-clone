@@ -3,29 +3,18 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import {
-  FcHome,
-  FcReading,
-  FcTodoList,
-  FcVideoCall,
-  FcAbout,
-  FcIdea,
-  FcShop,
   FcLike,
   FcBriefcase,
   FcDisclaimer,
   FcBusinessContact,
 } from "react-icons/fc";
-import { AiFillAudio } from "react-icons/ai";
-import { FaTags, FaDev } from "react-icons/fa";
+import { FaDev } from "react-icons/fa";
 import { IoLogoTwitter, IoLogoFacebook, IoLogoGithub } from "react-icons/io";
 import { RiInstagramFill, RiTwitchLine } from "react-icons/ri";
 import { CgShapeHexagon } from "react-icons/cg";
 import { GrFormClose } from "react-icons/gr";
 import type { IconType } from "react-icons";
-import { BsBookmarkHeart } from "react-icons/bs";
 import { HiOutlineLightBulb } from "react-icons/hi";
-import { BiPurchaseTag } from "react-icons/bi";
-import { FiBox } from "react-icons/fi";
 import { CgShoppingBag } from "react-icons/cg";
 import { RiFileList3Line } from "react-icons/ri";
 import { HomeIcon } from "~/components/icons/HomeIcon";
@@ -34,6 +23,7 @@ import { useSession } from "next-auth/react";
 import { DevPlusIcon } from "~/components/icons/DevPlusIcon";
 import { PodcastIcon } from "~/components/icons/PodcastIcon";
 import { VideoIcon } from "~/components/icons/VideoIcon";
+import { TagIcon } from "~/components/icons/TagIcon";
 
 const tags = [
   "react",
@@ -147,7 +137,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         <li>
           <Link href="/tags" className={sidebarLinkStyles.default}>
             <i className={sidebarLinkStyles.icon}>
-              <BiPurchaseTag />
+              <TagIcon />
             </i>
             Tags
           </Link>
