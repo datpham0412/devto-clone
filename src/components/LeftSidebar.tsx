@@ -26,6 +26,8 @@ import { VideoIcon } from "~/components/icons/VideoIcon";
 import { TagIcon } from "~/components/icons/TagIcon";
 import { HelpIcon } from "~/components/icons/HelpIcon";
 import { ShopIcon } from "~/components/icons/ShopIcon";
+import { AdvertiseIcon } from "~/components/icons/AdvertiseIcon";
+import { ChallengesIcon } from "~/components/icons/ChallengesIcon";
 
 const tags = [
   "react",
@@ -66,9 +68,7 @@ const socialLinks: SocialLink[] = [
 ];
 
 const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
-  const [more, setMore] = useState(false);
   const { data: session } = useSession();
-  const toggle = () => setMore(!more);
 
   const LoginCard = () => (
     <div className="mb-4 rounded-lg border border-gray-200 bg-white p-4">
@@ -118,9 +118,6 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
           </Link>
         </li>
         <li>
-      
-        </li>
-        <li>
           <Link href="/podcast" className={sidebarLinkStyles.default}>
             <i className={sidebarLinkStyles.icon}>
               <PodcastIcon />
@@ -160,70 +157,77 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
             Forem Shop
           </Link>
         </li>
+
+        <li>
+          <div className={sidebarLinkStyles.divider} />
+        </li>
+
+        <li>
+          <Link href="/advertise" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
+              <AdvertiseIcon />
+            </i>
+            Advertise on DEV
+          </Link>
+        </li>
+        <li>
+          <Link href="/challenges" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
+              <ChallengesIcon />
+            </i>
+            DEV Challenges
+          </Link>
+        </li>
+        <li>
+          <Link href="/about" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
+              <FaDev />
+            </i>
+            About
+          </Link>
+        </li>
+        <li>
+          <Link href="/contact" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
+              <FcBusinessContact />
+            </i>
+            Contact
+          </Link>
+        </li>
+
+        <li>
+          <div className={sidebarLinkStyles.divider} />
+        </li>
+
+        <li>
+          <h3 className={sidebarLinkStyles.sectionHeader}>Other</h3>
+        </li>
+
+        <li>
+          <Link href="/code" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
+              <RiFileList3Line />
+            </i>
+            Code of Conduct
+          </Link>
+        </li>
+        <li>
+          <Link href="/privacy" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
+              <FcBriefcase />
+            </i>
+            Privacy Policy
+          </Link>
+        </li>
+        <li>
+          <Link href="/terms" className={sidebarLinkStyles.default}>
+            <i className={sidebarLinkStyles.icon}>
+              <FcDisclaimer />
+            </i>
+            Terms of use
+          </Link>
+        </li>
       </ul>
-
-      <div className={more ? "block" : "hidden"}>
-        <div className={sidebarLinkStyles.divider} />
-        <ul className="space-y-1">
-          <li>
-            <Link href="/advertise" className={sidebarLinkStyles.default}>
-              <i className={sidebarLinkStyles.icon}>
-                <FcLike />
-              </i>
-              Advertise on DEV
-            </Link>
-          </li>
-          <li>
-            <Link href="/about" className={sidebarLinkStyles.default}>
-              <i className={sidebarLinkStyles.icon}>
-                <FaDev />
-              </i>
-              About
-            </Link>
-          </li>
-          <li>
-            <Link href="/contact" className={sidebarLinkStyles.default}>
-              <i className={sidebarLinkStyles.icon}>
-                <FcBusinessContact />
-              </i>
-              Contact
-            </Link>
-          </li>
-        </ul>
-
-        <div className={sidebarLinkStyles.divider} />
-        <h3 className={sidebarLinkStyles.sectionHeader}>Other</h3>
-        <ul className="space-y-1">
-          <li>
-            <Link href="/code" className={sidebarLinkStyles.default}>
-              <i className={sidebarLinkStyles.icon}>
-                <RiFileList3Line />
-              </i>
-              Code of Conduct
-            </Link>
-          </li>
-          <li>
-            <Link href="/privacy" className={sidebarLinkStyles.default}>
-              <i className={sidebarLinkStyles.icon}>
-                <FcBriefcase />
-              </i>
-              Privacy Policy
-            </Link>
-          </li>
-          <li>
-            <Link href="/terms" className={sidebarLinkStyles.default}>
-              <i className={sidebarLinkStyles.icon}>
-                <FcDisclaimer />
-              </i>
-              Terms of use
-            </Link>
-          </li>
-        </ul>
-      </div>
-
-      <button onClick={toggle} className={sidebarLinkStyles.moreButton}>
-        {more ? "Less..." : "More..."}
-      </button>
     </>
   );
 
@@ -236,7 +240,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
           <MenuLinks />
         </nav>
 
-        <div className={`mt-4 flex p-2 ${more ? "block" : "hidden"}`}>
+        <div className="mt-4 flex p-2">
           {socialLinks.map(({ Icon, url }, index) => (
             <Link
               key={index}
