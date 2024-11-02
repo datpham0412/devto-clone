@@ -31,6 +31,7 @@ import { RiFileList3Line } from "react-icons/ri";
 import { HomeIcon } from "~/components/icons/HomeIcon";
 import { sidebarLinkStyles } from "~/styles/sidebar";
 import { useSession } from "next-auth/react";
+import { DevPlusIcon } from "~/components/icons/DevPlusIcon";
 
 const tags = [
   "react",
@@ -117,18 +118,13 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         <li>
           <Link href="/devplus" className={sidebarLinkStyles.default}>
             <i className={`${sidebarLinkStyles.icon} text-indigo-600`}>
-              <FiBox />
+              <DevPlusIcon />
             </i>
             DEV++
           </Link>
         </li>
         <li>
-          <Link href="/reading" className={sidebarLinkStyles.default}>
-            <i className={sidebarLinkStyles.icon}>
-              <BsBookmarkHeart />
-            </i>
-            Reading List
-          </Link>
+      
         </li>
         <li>
           <Link href="/podcast" className={sidebarLinkStyles.default}>
