@@ -13,7 +13,13 @@ module.exports = {
           '50%': { transform: 'translateX(-70%)' },
           '100%': { transform: 'translateX(100%)' }
         }
-      }
+      },
+      components: {
+        '.multiple-reactions-container': {
+          display: 'inline-flex',
+          direction: 'rtl',
+        },
+      },
     }
   },
   plugins: [],
