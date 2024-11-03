@@ -2,6 +2,7 @@ import React from "react";
 import CardComponent from "~/components/CardComponent";
 import Image from "next/image";
 import Link from "next/link";
+import WhatsHappening from "./WhatsHappening";
 
 interface ListingItem {
   id: number;
@@ -104,6 +105,7 @@ const help: HelpItem[] = [
 const RightSidebar: React.FC = () => {
   return (
     <aside className="flex flex-col">
+      <WhatsHappening />
       <div className="h-max rounded-lg bg-gray-50 p-4 leading-relaxed">
         <p className="mb-4">
           <Image

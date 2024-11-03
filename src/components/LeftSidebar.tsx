@@ -198,7 +198,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
 
   const LoginCard = () => (
     <div className="mb-4 rounded-lg border border-gray-200 bg-white p-4">
-      <h2 className="mb-4 text-xl font-bold leading-tight">
+      <h2 className="mb-4 text-xl font-bold leading-tight text-[#404040]">
         DEV Community is a community of 2,298,425 amazing developers
       </h2>
       <p className="mb-4 text-base text-gray-600 font-normal">
