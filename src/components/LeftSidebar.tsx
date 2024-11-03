@@ -30,6 +30,7 @@ import { ContactIcon } from "~/components/icons/ContactIcon";
 import { PostgresIcon } from "~/components/icons/PostgresIcon";
 import { GuideIcon } from "~/components/icons/GuideIcon";
 import { SoftwareComparisonIcon } from "~/components/icons/SoftwareComparisonIcon";
+import { CodeOfConductIcon } from "~/components/icons/CodeOfConductIcon";
 
 const tags = [
   "react",
@@ -240,7 +241,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         <li>
           <Link href="/code" className={sidebarLinkStyles.default}>
             <i className={sidebarLinkStyles.icon}>
-              <RiFileList3Line />
+              <CodeOfConductIcon />
             </i>
             Code of Conduct
           </Link>
