@@ -74,7 +74,7 @@ const socialLinks: SocialLink[] = [
 
 const DiamondSponsors = () => (
   <div className="mt-4 crayons-card crayons-card--secondary crayons-bb billboard js-billboard" 
-       style={{ border: "5px solid #000", borderRadius: "8px" }}>
+       style={{ border: "5px solid #000", borderRadius: "8px", backgroundColor: "white" }}>
     <div className="crayons-bb__header relative">
       <div className="crayons-bb__title mt-1">💎 DEV Diamond Sponsors</div>
       
@@ -101,6 +101,42 @@ const DiamondSponsors = () => (
       </a>
       <p className="mb-4 text-base text-gray-600 font-normal italic">Neon is the official database partner of DEV</p>
       <p className="mb-4 text-base text-gray-600 font-normal">Happy coding ❤️</p>
+    </div>
+  </div>
+);
+
+const CommunityBillboard = () => (
+  <div className="mt-4 crayons-card crayons-card--secondary crayons-bb billboard js-billboard" style={{ backgroundColor: 'white', borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)' }}>
+    <div className="crayons-bb__header relative">
+      <div className="crayons-bb__title">DEV Community</div>
+
+      <button 
+        id="sponsorship-dropdown-trigger-877"
+        aria-controls="sponsorship-dropdown-877"
+        aria-expanded="false"
+        aria-haspopup="true"
+        className="dropBtn crayons-bb__dropdown crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon"
+        aria-label="Toggle dropdown menu"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-labelledby="billboard-menu" className="rounded-lg mb-5">
+          <title id="billboard-menu">Dropdown menu</title>
+          <path fillRule="evenodd" clipRule="evenodd" d="M8.25 12a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm5.25 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm3.75 1.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+        </svg>
+      </button>
+    </div>
+
+    <div className="p-1 pt-3 text-styles text-styles--billboard">
+      <p>
+        <a href="https://dev.to/enter?state=new-user&bb=877">
+          <Image 
+            src="https://media2.dev.to/dynamic/image/width=350%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fvgwfh7hesdncf0pv57j1.png"
+            alt="Join the Community!"
+            width={1200}
+            height={1262}
+            className="w-full px-4 mb-10"
+          />
+        </a>
+      </p>
     </div>
   </div>
 );
@@ -336,6 +372,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         </nav>
 
         <DiamondSponsors />
+        <CommunityBillboard />
       </aside>
 
       {burgerMenu && (
