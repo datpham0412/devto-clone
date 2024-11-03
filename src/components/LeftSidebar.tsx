@@ -31,6 +31,8 @@ import { PostgresIcon } from "~/components/icons/PostgresIcon";
 import { GuideIcon } from "~/components/icons/GuideIcon";
 import { SoftwareComparisonIcon } from "~/components/icons/SoftwareComparisonIcon";
 import { CodeOfConductIcon } from "~/components/icons/CodeOfConductIcon";
+import { PrivacyPolicyIcon } from "~/components/icons/PrivacyPolicyIcon";
+import { TermsOfUseIcon } from "~/components/icons/TermsOfUseIcon";
 
 const tags = [
   "react",
@@ -249,7 +251,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         <li>
           <Link href="/privacy" className={sidebarLinkStyles.default}>
             <i className={sidebarLinkStyles.icon}>
-              <FcBriefcase />
+              <PrivacyPolicyIcon />
             </i>
             Privacy Policy
           </Link>
@@ -257,7 +259,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         <li>
           <Link href="/terms" className={sidebarLinkStyles.default}>
             <i className={sidebarLinkStyles.icon}>
-              <FcDisclaimer />
+              <TermsOfUseIcon />
             </i>
             Terms of use
           </Link>
