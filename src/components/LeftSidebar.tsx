@@ -30,6 +30,7 @@ import { GithubIcon } from "~/components/icons/social/GithubIcon";
 import { InstagramIcon } from "~/components/icons/social/InstagramIcon";
 import { TwitchIcon } from "~/components/icons/social/TwitchIcon";
 import { MastodonIcon } from "~/components/icons/social/MastodonIcon";
+import Image from "next/image";
 
 const tags = [
   "react",
@@ -70,6 +71,39 @@ const socialLinks: SocialLink[] = [
   { Icon: TwitchIcon, url: "https://twitch.com/thepracticaldev", label: "Twitch" },
   { Icon: MastodonIcon, url: "https://fosstodon.org/@thepracticaldev", label: "Mastodon" }
 ];
+
+const DiamondSponsors = () => (
+  <div className="mt-4 crayons-card crayons-card--secondary crayons-bb billboard js-billboard" 
+       style={{ border: "5px solid #000", borderRadius: "8px" }}>
+    <div className="crayons-bb__header relative">
+      <div className="crayons-bb__title mt-1">💎 DEV Diamond Sponsors</div>
+      
+      <button 
+        className="dropBtn crayons-bb__dropdown crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon mt-2" 
+        aria-label="Toggle dropdown menu"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img">
+          <path fillRule="evenodd" clipRule="evenodd" d="M8.25 12a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm5.25 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm3.75 1.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+        </svg>
+      </button>
+    </div>
+
+    <div className="p-4 pt-1 text-styles text-styles--billboard" style={{color: '#404040' }}>
+      <h4 style={{color: '#404040', fontSize: '1rem'}}>Thank you to our Diamond Sponsor Neon</h4>
+      <a href="https://neon.tech/?ref=devto" target="_blank" rel="noopener noreferrer">
+        <Image 
+          src="https://media2.dev.to/dynamic/image/width=350%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fbillboards.forem.tools%2Frails%2Factive_storage%2Fblobs%2Fredirect%2FeyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbGNDIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--81f4f05c27808f68c1e91590ff950026157d3fd0%2FScreenshot%25202024-07-19%2520at%252012.04.24%25E2%2580%25AFPM.png"
+          alt="Neon logo"
+          width={824}
+          height={320}
+          className="rounded-lg mb-5"
+        />
+      </a>
+      <p className="mb-4 text-base text-gray-600 font-normal italic">Neon is the official database partner of DEV</p>
+      <p className="mb-4 text-base text-gray-600 font-normal">Happy coding ❤️</p>
+    </div>
+  </div>
+);
 
 const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
   const { data: session } = useSession();
@@ -300,6 +334,8 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
             ))}
           </ul>
         </nav>
+
+        <DiamondSponsors />
       </aside>
 
       {burgerMenu && (

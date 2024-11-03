@@ -32,3 +32,43 @@
 .overlay {
   @apply absolute inset-0 z-[300] bg-black/50;
 }
+
+.crayons-card--secondary {
+  background: var(--card-secondary-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+}
+
+.crayons-bb__header {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--base-10);
+}
+
+.crayons-bb__title {
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--base-90);
+  color: rgb(75, 85, 99);
+  margin-top: 0.5rem;
+}
+
+.crayons-bb__dropdown {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+}
+
+.text-styles--billboard {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.text-styles--billboard h4 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.text-styles--billboard p {
+  margin-bottom: 0.5rem;
+} 
