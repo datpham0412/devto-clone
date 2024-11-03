@@ -2,17 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import {
-  FcBriefcase,
-  FcDisclaimer,
-  FcBusinessContact,
-} from "react-icons/fc";
-import { IoLogoTwitter, IoLogoFacebook, IoLogoGithub } from "react-icons/io";
-import { RiInstagramFill, RiTwitchLine } from "react-icons/ri";
-import { CgShapeHexagon } from "react-icons/cg";
 import { GrFormClose } from "react-icons/gr";
 import type { IconType } from "react-icons";
-import { RiFileList3Line } from "react-icons/ri";
 import { HomeIcon } from "~/components/icons/HomeIcon";
 import { sidebarLinkStyles } from "~/styles/sidebar";
 import { useSession } from "next-auth/react";
@@ -33,6 +24,12 @@ import { SoftwareComparisonIcon } from "~/components/icons/SoftwareComparisonIco
 import { CodeOfConductIcon } from "~/components/icons/CodeOfConductIcon";
 import { PrivacyPolicyIcon } from "~/components/icons/PrivacyPolicyIcon";
 import { TermsOfUseIcon } from "~/components/icons/TermsOfUseIcon";
+import { TwitterIcon } from "~/components/icons/social/TwitterIcon";
+import { FacebookIcon } from "~/components/icons/social/FacebookIcon";
+import { GithubIcon } from "~/components/icons/social/GithubIcon";
+import { InstagramIcon } from "~/components/icons/social/InstagramIcon";
+import { TwitchIcon } from "~/components/icons/social/TwitchIcon";
+import { MastodonIcon } from "~/components/icons/social/MastodonIcon";
 
 const tags = [
   "react",
@@ -62,14 +59,16 @@ interface LeftSidebarProps {
 interface SocialLink {
   Icon: IconType;
   url: string;
+  label: string;
 }
 
 const socialLinks: SocialLink[] = [
-  { Icon: IoLogoTwitter, url: "/twitter" },
-  { Icon: IoLogoFacebook, url: "/facebook" },
-  { Icon: IoLogoGithub, url: "/github" },
-  { Icon: RiInstagramFill, url: "/instagram" },
-  { Icon: RiTwitchLine, url: "/twitch" },
+  { Icon: TwitterIcon, url: "https://twitter.com/thepracticaldev", label: "Twitter" },
+  { Icon: FacebookIcon, url: "https://facebook.com/thepracticaldev", label: "Facebook" },
+  { Icon: GithubIcon, url: "https://github.com/forem", label: "Github" },
+  { Icon: InstagramIcon, url: "https://instagram.com/thepracticaldev", label: "Instagram" },
+  { Icon: TwitchIcon, url: "https://twitch.com/thepracticaldev", label: "Twitch" },
+  { Icon: MastodonIcon, url: "https://fosstodon.org/@thepracticaldev", label: "Mastodon" }
 ];
 
 const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
@@ -273,26 +272,27 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
       <aside className="hidden w-[240px] lg:block">
         {!session && <LoginCard />}
           <MenuLinks />
-        <div className="mt-4 flex p-2">
-          {socialLinks.map(({ Icon, url }, index) => (
-            <Link
+        <div className="mt-4 flex gap-4 p-2">
+          {socialLinks.map(({ Icon, url, label }, index) => (
+            <a
               key={index}
               href={url}
-              className={sidebarLinkStyles.socialIcon}
+              target="_blank"
+              className="c-link c-link--icon-alone c-link--block"
+              rel="noopener me"
             >
               <Icon />
-            </Link>
+            </a>
           ))}
         </div>
 
-        <nav className="px-2">
+        <nav className="mt-2">
           <header className="flex items-center justify-between p-2">
-            <h3 className={sidebarLinkStyles.tagHeader}>My Tags</h3>
+            <h3 className={sidebarLinkStyles.tagHeader}>Popular Tags</h3>
             <i className="cursor-pointer rounded-lg p-2 text-2xl text-gray-600 hover:bg-gray-100 hover:text-gray-900">
-              <CgShapeHexagon />
             </i>
           </header>
-          <ul className="mr-3 h-[40vh] space-y-2 overflow-y-auto leading-loose">
+          <ul className="mr-3 h-[40vh] space-y-2 overflow-y-auto leading-loose px-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full">
             {tags.map((tag, id) => (
               <li key={id} className={`${sidebarLinkStyles.tagItem} py-1`}>
                 <Link href={`/#${tag}`}>#{tag}</Link>
