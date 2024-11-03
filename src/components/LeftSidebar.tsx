@@ -141,6 +141,58 @@ const CommunityBillboard = () => (
   </div>
 );
 
+const Footer = () => (
+  <footer className="mt-6 text-sm text-gray-600 font-normal sidebar-footer">
+    <p>
+      <Link href="/" className="text-[#3B49DF] font-medium" aria-label="DEV Community Home">
+        DEV Community
+      </Link>
+      {"  "}
+      A constructive and inclusive social network for software developers. With you every step of your journey.
+    </p>
+
+    <p className="mt-4">
+      Built with the{" "}
+      <a className="text-[#3B49DF]" target="_blank" rel="noopener" href="https://create.t3.gg">
+        T3 Stack
+      </a>
+      {" — "}featuring{" "}
+      <a target="_blank" rel="noopener" className="text-[#3B49DF]" href="https://prisma.io">
+        Prisma
+      </a>
+      {", "}
+      <a target="_blank" rel="noopener" className="text-[#3B49DF]" href="https://trpc.io">
+        tRPC
+      </a>
+      {", "}
+      <a target="_blank" rel="noopener" className="text-[#3B49DF]" href="https://nextjs.org">
+        Next.js
+      </a>
+      {", "}
+      <a target="_blank" rel="noopener" className="text-[#3B49DF]" href="https://next-auth.js.org">
+        NextAuth
+      </a>
+      {", and "}
+      <a target="_blank" rel="noopener" className="text-[#3B49DF]" href="https://tailwindcss.com">
+        Tailwind
+      </a>
+      {". Powered by "}
+      <a target="_blank" rel="noopener" className="text-[#3B49DF]" href="https://supabase.com">
+        Supabase
+      </a>
+      {" for open source backend services."}
+    </p>
+
+    <p className="mt-4">
+      Made by{" "}
+      <a target="_blank" rel="noopener" className="text-[#3B49DF]" href="https://github.com/datpham0412">
+        Dat Pham
+      </a>
+      {" © 2024"}
+    </p>
+  </footer>
+);
+
 const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
   const { data: session } = useSession();
 
@@ -341,7 +393,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
     <>
       <aside className="hidden w-[240px] lg:block">
         {!session && <LoginCard />}
-          <MenuLinks />
+        <MenuLinks />
         <div className="mt-4 flex gap-4 p-2">
           {socialLinks.map(({ Icon, url, label }, index) => (
             <a
@@ -373,6 +425,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
 
         <DiamondSponsors />
         <CommunityBillboard />
+        <Footer />
       </aside>
 
       {burgerMenu && (
