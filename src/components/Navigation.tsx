@@ -44,20 +44,28 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
 
   return (
     <header className="flex h-[56px] w-full border-b border-gray-200 bg-white">
-      <div className="mx-auto flex w-full max-w-[1380px] items-center">
-        {/* Hamburger Menu */}
-        <div
-          onClick={openMenu}
-          className="group relative mr-4 hidden h-[2px] w-5 cursor-pointer bg-gray-900 before:block before:h-[2px] before:w-5 before:-translate-y-2 before:bg-gray-900 before:content-[''] after:block after:h-[2px] after:w-5 after:translate-y-1 after:bg-gray-900 after:content-['']"
-        />
+      <div className="mx-auto flex w-full max-w-[1380px] items-center px-4 sm:px-6">
+        {/* Left section: Hamburger + Logo */}
+        <div className="flex items-center">
+          <button
+            onClick={openMenu}
+            className="mr-4 block md:hidden"
+            aria-label="Menu"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 12H21" stroke="currentColor" strokeWidth="2"/>
+              <path d="M3 6H21" stroke="currentColor" strokeWidth="2"/>
+              <path d="M3 18H21" stroke="currentColor" strokeWidth="2"/>
+            </svg>
+          </button>
 
-        {/* Logo */}
-        <Link href="/" className="flex items-center py-2 text-black">
-          <FaDev size="3rem" />
-        </Link>
+          <Link href="/" className="flex items-center py-2 text-black">
+            <FaDev size={window.innerWidth < 768 ? "1.5rem" : "3rem"} />
+          </Link>
+        </div>
 
-        {/* Search Box */}
-        <div className="relative mx-4 max-w-[700px] flex-1">
+        {/* Center section: Search */}
+        <div className="mx-4 hidden w-[680px] md:block">
           <form className="relative">
             <input
               type="text"
@@ -103,32 +111,29 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
           </form>
         </div>
 
-        {/* Right Section */}
-        <div className="ml-auto flex items-center">
+        {/* Right section */}
+        <div className="ml-auto flex items-center gap-2">
+          {/* Mobile search icon - Moved inside right section */}
+          <button className="block md:hidden">
+            <FiSearch size={24} />
+          </button>
+
           {session ? (
             <>
               <Link 
                 href="/"
-                className="mr-2 whitespace-nowrap rounded-md border border-[#3B49DF] px-4 py-2 text-base text-[#3B49DF] hover:bg-[#3B49DF] hover:text-white hover:underline"
+                className="mr-2 hidden whitespace-nowrap rounded-md border border-[#3B49DF] px-4 py-2 text-base text-[#3B49DF] hover:bg-[#3B49DF] hover:text-white hover:underline sm:block"
               >
                 Create Post
               </Link>
-              <i className="hidden">
-                <FiSearch />
-              </i>
-              {[RiNotificationLine].map(
-                (Icon, index) => (
-                  <i
-                    key={index}
-                    className="flex cursor-pointer items-center rounded-md p-2 text-2xl text-gray-600 hover:bg-[#3B49DF1A] hover:text-[#2F3AB2]"
-                  >
-                    <Icon size={24} />
-                  </i>
-                ),
-              )}
+              
+              <button className="flex cursor-pointer items-center rounded-md p-2 text-2xl text-gray-600 hover:bg-[#3B49DF1A] hover:text-[#2F3AB2]">
+                <RiNotificationLine size={24} />
+              </button>
+
               <span
                 onClick={() => setShowMenu(!showMenu)}
-                className="mx-4 h-10 w-10 cursor-pointer"
+                className="ml-2 h-8 w-8 cursor-pointer sm:h-10 sm:w-10"
               >
                 <Image
                   src={avatarUrl}
@@ -140,26 +145,27 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
               </span>
             </>
           ) : (
-            <div className="flex gap-2">
+            <>
               <Link
                 href="/auth/signin"
-                className="rounded-md px-4 py-2 text-base text-gray-600 font-normal hover:text-[#2F3AB2] hover:bg-[#3B49DF1A] hover:underline"
+                className="hidden whitespace-nowrap rounded-md px-4 py-2 text-base text-gray-600 font-normal hover:bg-[#3B49DF1A] hover:text-[#2F3AB2] hover:underline sm:block"
               >
                 Log in
               </Link>
               <Link
                 href="/auth/signup"
-                className="c-cta c-cta--branded mr-2 whitespace-nowrap rounded-md border border-[#3B49DF] px-4 py-2 text-base text-[#3B49DF] hover:bg-[#3B49DF] hover:text-white hover:underline"
+                className="flex h-[38px] items-center whitespace-nowrap rounded-md border border-[#3B49DF] px-3 text-sm text-[#3B49DF] hover:bg-[#3B49DF] hover:text-white hover:underline sm:px-4 sm:text-base"
               >
                 Create account
               </Link>
-            </div>
+            </>
           )}
         </div>
       </div>
 
+      {/* Dropdown Menu - Make it full width on mobile */}
       {showMenu && session && (
-        <div className="absolute right-16 top-[56px] z-10 min-w-[250px] rounded-lg border-2 border-gray-900 bg-white shadow-[4px_4px_0_0_rgba(0,0,0,0.9)]">
+        <div className="absolute right-0 top-[56px] z-10 w-full border-b border-gray-200 bg-white shadow-lg sm:right-16 sm:w-auto sm:min-w-[250px] sm:rounded-lg sm:border-2 sm:border-gray-900 sm:shadow-[4px_4px_0_0_rgba(0,0,0,0.9)]">
           <ul>
             <li className="cursor-pointer border-b border-gray-200 p-3">
               <Link href={`/user/${username}`}>
