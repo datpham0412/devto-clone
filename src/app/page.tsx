@@ -22,19 +22,27 @@ function HomeClient() {
 
   return (
     <div className="min-h-screen bg-[#f5f5f5] font-semibold">
-      <div className="w-full border-b border-gray-200 bg-white">
+      {/* Navigation - Fixed on all screens */}
+      <div className="sticky top-0 z-30 w-full border-b border-gray-200 bg-white">
         <div className="mx-auto max-w-[1380px]">
           <Navigation openMenu={openMenu} />
         </div>
       </div>
-      <div className="mx-auto max-w-[1380px] py-3">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-[240px_1fr_360px] lg:grid-cols-[240px_1fr_360px]">
+
+      {/* Main Content Area */}
+      <div className="mx-auto max-w-[1380px] px-4 py-3 sm:px-6">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-[200px_1fr] lg:grid-cols-[220px_1fr_300px] xl:grid-cols-[240px_1fr_360px]">
+          {/* Left Sidebar - Hidden on mobile */}
           <div className="hidden md:block">
             <LeftSidebar burgerMenu={isBurgerMenuOpen} closeMenu={closeMenu} />
           </div>
-          <div>
+          
+          {/* Main Content */}
+          <main className="min-w-0">
             <Content />
-          </div>
+          </main>
+
+          {/* Right Sidebar - Hidden on mobile and tablet */}
           <div className="hidden lg:block">
             <RightSidebar />
           </div>
