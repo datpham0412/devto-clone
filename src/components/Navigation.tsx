@@ -141,13 +141,13 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
             <div className="flex gap-2">
               <Link
                 href="/auth/signin"
-                className="rounded-lg px-5 py-2 text-lg text-gray-600 hover:bg-gray-50 hover:text-gray-700"
+                className="rounded-md px-4 py-2 text-base text-gray-600 font-normal hover:text-[#2F3AB2] hover:bg-[#3B49DF1A] hover:underline"
               >
                 Log in
               </Link>
               <Link
                 href="/auth/signup"
-                className="c-cta c-cta--branded mr-2 whitespace-nowrap rounded-lg border border-[#3B49DF] px-5 py-2 text-lg text-[#3B49DF] hover:bg-[#3B49DF] hover:text-white"
+                className="c-cta c-cta--branded mr-2 whitespace-nowrap rounded-md border border-[#3B49DF] px-4 py-2 text-base text-[#3B49DF] hover:bg-[#3B49DF] hover:text-white hover:underline"
               >
                 Create account
               </Link>
