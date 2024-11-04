@@ -391,64 +391,84 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
 
   return (
     <>
-      <aside className="hidden w-[240px] lg:block">
-        {!session && <LoginCard />}
-        <MenuLinks />
-        <div className="mt-4 flex gap-4 p-2">
-          {socialLinks.map(({ Icon, url, label }, index) => (
-            <a
-              key={index}
-              href={url}
-              target="_blank"
-              className="c-link c-link--icon-alone c-link--block "
-              rel="noopener me"
-            >
-              <Icon />
-            </a>
-          ))}
-        </div>
-
-        <nav className="mt-2">
-          <header className="flex items-center justify-between p-2">
-            <h3 className={sidebarLinkStyles.tagHeader}>Popular Tags</h3>
-            <i className="cursor-pointer rounded-lg p-2 text-2xl text-gray-600 hover:bg-gray-100 hover:text-gray-900">
-            </i>
-          </header>
-          <ul className="mr-3 h-[40vh] space-y-2 overflow-y-auto leading-loose pr-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full">
-            {tags.map((tag, id) => (
-              <li key={id} className={`${sidebarLinkStyles.tagItem} py-1`}>
-                <Link href={`/#${tag}`}>#{tag}</Link>
-              </li>
+      {/* Desktop Sidebar */}
+      <aside className="hidden md:block">
+        <div className="space-y-4 pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          {!session && <LoginCard />}
+          <MenuLinks />
+          <div className="mt-4 flex flex-wrap gap-4 p-2">
+            {socialLinks.map(({ Icon, url, label }, index) => (
+              <a
+                key={index}
+                href={url}
+                target="_blank"
+                className="text-gray-600 hover:text-gray-900"
+                rel="noopener me"
+              >
+                <Icon />
+              </a>
             ))}
-          </ul>
-        </nav>
+          </div>
+          <nav className="mt-2">
+            <header className="flex items-center justify-between p-2">
+              <h3 className={sidebarLinkStyles.tagHeader}>Popular Tags</h3>
+              <i className="cursor-pointer rounded-lg p-2 text-2xl text-gray-600 hover:bg-gray-100 hover:text-gray-900">
+              </i>
+            </header>
+            <ul className="mr-3 h-[40vh] space-y-2 overflow-y-auto leading-loose pr-2 
+              scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 
+              hover:scrollbar-thumb-gray-400">
+              {tags.map((tag, id) => (
+                <li key={id} className={`${sidebarLinkStyles.tagItem} py-1`}>
+                  <Link href={`/#${tag}`}>#{tag}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        <DiamondSponsors />
-        <CommunityBillboard />
-        <Footer />
+          <DiamondSponsors />
+          <CommunityBillboard />
+          <Footer />
+        </div>
       </aside>
 
+      {/* Mobile Sidebar Overlay */}
       {burgerMenu && (
-        <div className="fixed inset-0 z-50">
+        <div className="fixed inset-0 z-50 md:hidden">
+          <div 
+            className="absolute inset-0 bg-black/50"
+            onClick={closeMenu}
+          />
           <div className="relative h-full w-[90%] max-w-[300px] overflow-y-auto bg-white">
-            <header className="flex items-center border-b border-gray-200 p-4">
-              <h2 className="flex-1 text-lg">DEV Community</h2>
+            <header className="sticky top-0 z-10 flex items-center border-b border-gray-200 bg-white p-4">
+              <h2 className="flex-1 text-lg font-bold">DEV Community</h2>
               <button
                 onClick={closeMenu}
-                className="rounded-full text-2xl hover:bg-gray-100 hover:shadow-[0_0_0_5px_rgba(0,0,0,0.05)]"
+                className="rounded-full p-2 hover:bg-gray-100"
               >
-                <GrFormClose />
+                <GrFormClose size={24} />
               </button>
             </header>
 
-            <div className="p-2">
-              <nav>
-                <MenuLinks />
-              </nav>
+            <div className="p-4">
+              {!session && <LoginCard />}
+              <MenuLinks />
+              <div className="mt-4 flex flex-wrap gap-4">
+                {socialLinks.map(({ Icon, url, label }, index) => (
+                  <a
+                    key={index}
+                    href={url}
+                    target="_blank"
+                    className="text-gray-600 hover:text-gray-900"
+                    rel="noopener me"
+                  >
+                    <Icon />
+                  </a>
+                ))}
+              </div>
+              <Footer />
             </div>
           </div>
-
-          <div className="absolute inset-0 bg-black/50" />
         </div>
       )}
     </>
