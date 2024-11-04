@@ -119,7 +119,7 @@ const TrendingGuides = () => {
           </span>
         </h3>
       </header>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col">
         {guides.map((guide) => (
           <Link
             key={guide.id}

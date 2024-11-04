@@ -3,6 +3,7 @@ import WhatsHappening from "./WhatsHappening";
 import Discussions from "./Discussions";
 import WaterCooler from "./WaterCooler";
 import TrendingGuides from "./TrendingGuides";
+import RecentlyQueried from "./RecentlyQueried";
 
 const RightSidebar: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ const RightSidebar: React.FC = () => {
       <Discussions />
       <WaterCooler />
       <TrendingGuides />
+      <RecentlyQueried />
     </aside>
   );
 };
