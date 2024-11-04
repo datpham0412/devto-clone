@@ -205,10 +205,10 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         We're a place where coders share, stay up-to-date and grow their
         careers.
       </p>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-1">
         <Link
           href="/auth/signup"
-          className="c-cta c-cta--branded mr-2 flex w-full items-center justify-center whitespace-nowrap rounded-lg border border-[#3B49DF] px-3 py-1.5 text-lg text-[#3B49DF] hover:bg-[#3B49DF] hover:text-white"
+          className="c-cta c-cta--branded mr-2 flex w-full items-center justify-center whitespace-nowrap rounded-md border border-[#3B49DF] px-3 py-2 text-base text-[#3B49DF] hover:bg-[#3B49DF] hover:text-white hover:underline"
           data-tracking-id="ca_left_sidebar_home_page"
           data-tracking-source="left_sidebar"
         >
@@ -216,7 +216,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
         </Link>
         <Link
           href="/auth/signin"
-          className="flex w-full items-center justify-center rounded-lg px-3 py-1.5 text-base text-gray-600 hover:bg-gray-50 hover:text-gray-700"
+          className="flex w-full items-center justify-center rounded-md px-4 py-2 text-base text-gray-600 font-normal hover:text-[#2F3AB2] hover:bg-[#3B49DF1A] hover:underline"
         >
           Log in
         </Link>
@@ -400,7 +400,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
               key={index}
               href={url}
               target="_blank"
-              className="c-link c-link--icon-alone c-link--block"
+              className="c-link c-link--icon-alone c-link--block "
               rel="noopener me"
             >
               <Icon />
@@ -414,7 +414,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ burgerMenu, closeMenu }) => {
             <i className="cursor-pointer rounded-lg p-2 text-2xl text-gray-600 hover:bg-gray-100 hover:text-gray-900">
             </i>
           </header>
-          <ul className="mr-3 h-[40vh] space-y-2 overflow-y-auto leading-loose px-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full">
+          <ul className="mr-3 h-[40vh] space-y-2 overflow-y-auto leading-loose pr-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full">
             {tags.map((tag, id) => (
               <li key={id} className={`${sidebarLinkStyles.tagItem} py-1`}>
                 <Link href={`/#${tag}`}>#{tag}</Link>
