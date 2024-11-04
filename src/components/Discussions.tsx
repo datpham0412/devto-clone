@@ -46,7 +46,7 @@ const Discussions = () => {
     <section className="rounded-lg bg-white p-4 shadow-sm mb-4">
       <header className="mb-4">
         <h3 className="text-lg font-medium">
-          <Link href="/t/discuss" className="text-[#404040] hover:text-[#404040]/80 text-[20px] font-bold">
+          <Link href="/t/discuss" className="text-[#404040] hover:text-[#2F3AB2] text-[20px] font-bold">
             #discuss
           </Link>
         </h3>
@@ -63,7 +63,7 @@ const Discussions = () => {
               href={discussion.href}
               className="group flex flex-col gap-1 text-gray-900 hover:text-blue-800"
             >
-              <span className="mb-2 pt-1 text-base text-gray-600 font-normal">{discussion.title}</span>
+              <span className="mb-2 pt-1 text-base text-gray-600 font-normal hover:text-[#2F3AB2]">{discussion.title}</span>
               <div className="pt-1 text-[14px] text-[#575757] font-normal">
                 {discussion.comments && `${discussion.comments} comment${discussion.comments !== 1 ? 's' : ''}`}
                 {discussion.isNew && (
