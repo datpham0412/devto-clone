@@ -7,12 +7,14 @@ import RecentlyQueried from "./RecentlyQueried";
 
 const RightSidebar: React.FC = () => {
   return (
-    <aside className="flex flex-col">
-      <WhatsHappening />
-      <Discussions />
-      <WaterCooler />
-      <TrendingGuides />
-      <RecentlyQueried />
+    <aside className="flex flex-col gap-4">
+      <div className="space-y-4 pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        <WhatsHappening />
+        <Discussions />
+        <WaterCooler />
+        <TrendingGuides />
+        <RecentlyQueried />
+      </div>
     </aside>
   );
 };
