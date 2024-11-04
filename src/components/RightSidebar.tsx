@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import WhatsHappening from "./WhatsHappening";
 import Discussions from "./Discussions";
+import WaterCooler from "./WaterCooler";
 
 interface ListingItem {
   id: number;
@@ -108,6 +109,7 @@ const RightSidebar: React.FC = () => {
     <aside className="flex flex-col">
       <WhatsHappening />
       <Discussions />
+      <WaterCooler />
       <div className="h-max rounded-lg bg-gray-50 p-4 leading-relaxed">
         <p className="mb-4">
           <Image
