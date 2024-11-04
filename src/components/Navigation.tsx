@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaDev } from "react-icons/fa";
-import { BiMessageRoundedCheck } from "react-icons/bi";
 import { RiNotificationLine } from "react-icons/ri";
 import { FiSearch } from "react-icons/fi";
 import { useSession, signOut } from "next-auth/react";
@@ -108,17 +107,20 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
         <div className="ml-auto flex items-center">
           {session ? (
             <>
-              <button className="mr-2 rounded-lg bg-blue-600 px-5 py-2 text-lg text-white hover:bg-blue-700">
-                Write a post
-              </button>
+              <Link 
+                href="/"
+                className="mr-2 whitespace-nowrap rounded-md border border-[#3B49DF] px-4 py-2 text-base text-[#3B49DF] hover:bg-[#3B49DF] hover:text-white hover:underline"
+              >
+                Create Post
+              </Link>
               <i className="hidden">
                 <FiSearch />
               </i>
-              {[BiMessageRoundedCheck, RiNotificationLine].map(
+              {[RiNotificationLine].map(
                 (Icon, index) => (
                   <i
                     key={index}
-                    className="mx-4 flex cursor-pointer items-center rounded-full p-2 text-2xl text-gray-700 hover:bg-gray-100/50 hover:text-gray-900 hover:shadow-[0_0_0_10px_rgba(0,0,0,0.05)]"
+                    className="flex cursor-pointer items-center rounded-md p-2 text-2xl text-gray-600 hover:bg-[#3B49DF1A] hover:text-[#2F3AB2]"
                   >
                     <Icon size={24} />
                   </i>
