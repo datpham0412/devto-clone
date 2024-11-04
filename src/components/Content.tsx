@@ -41,31 +41,31 @@ const Content: React.FC = () => {
         <nav className="hidden md:block">
           <a
             href="/#"
-            className="relative mx-2 rounded-lg px-2 py-2 font-bold after:absolute after:bottom-0 after:left-0 after:right-0 after:mx-2 after:h-[3px] after:rounded-lg after:bg-blue-600 after:transition-all after:duration-200 hover:bg-blue-600/10 hover:text-blue-600 hover:after:mx-0 hover:after:rounded-none"
+            className="relative mx-2 rounded-lg px-2 py-2 font-bold after:absolute after:bottom-0 after:left-0 after:right-0 after:mx-2 after:h-[3px] after:rounded-lg after:bg-blue-600 after:transition-all after:duration-200 hover:bg-blue-600/10 hover:text-[#2F3AB2] hover:after:mx-0 hover:after:rounded-none"
           >
             Feed
           </a>
           <a
             href="/#"
-            className="mx-2 rounded-lg px-2 py-2 hover:bg-blue-600/10 hover:text-blue-600"
+            className="mx-2 rounded-lg px-2 py-2 hover:bg-blue-600/10 hover:text-[#2F3AB2]"
           >
             Week
           </a>
           <a
             href="/#"
-            className="mx-2 rounded-lg px-2 py-2 hover:bg-blue-600/10 hover:text-blue-600"
+            className="mx-2 rounded-lg px-2 py-2 hover:bg-blue-600/10 hover:text-[#2F3AB2]"
           >
             Month
           </a>
           <a
             href="/#"
-            className="mx-2 rounded-lg px-2 py-2 hover:bg-blue-600/10 hover:text-blue-600"
+            className="mx-2 rounded-lg px-2 py-2 hover:bg-blue-600/10 hover:text-[#2F3AB2]"
           >
             Infinity
           </a>
           <a
             href="/#"
-            className="mx-2 rounded-lg px-2 py-2 hover:bg-blue-600/10 hover:text-blue-600"
+            className="mx-2 rounded-lg px-2 py-2 hover:bg-blue-600/10 hover:text-[#2F3AB2]"
           >
             Latest
           </a>
