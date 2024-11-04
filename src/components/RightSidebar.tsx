@@ -3,6 +3,7 @@ import CardComponent from "~/components/CardComponent";
 import Image from "next/image";
 import Link from "next/link";
 import WhatsHappening from "./WhatsHappening";
+import Discussions from "./Discussions";
 
 interface ListingItem {
   id: number;
@@ -106,6 +107,7 @@ const RightSidebar: React.FC = () => {
   return (
     <aside className="flex flex-col">
       <WhatsHappening />
+      <Discussions />
       <div className="h-max rounded-lg bg-gray-50 p-4 leading-relaxed">
         <p className="mb-4">
           <Image
