@@ -16,7 +16,6 @@ interface MenuLink {
   text: string;
   href: string;
 }
-
 const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
   const [showMenu, setShowMenu] = useState(false);
   const { data: session, status } = useSession();
@@ -60,7 +59,7 @@ const Navigation: React.FC<NavigationProps> = ({ openMenu }) => {
           </button>
 
           <Link href="/" className="flex items-center py-2 text-black">
-            <FaDev size={window.innerWidth < 768 ? "1.5rem" : "3rem"} />
+          <FaDev size="3rem" />
           </Link>
         </div>
 

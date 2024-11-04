@@ -29,12 +29,17 @@ function HomeClient() {
         </div>
       </div>
 
+      {/* Mobile Sidebar */}
+      {isBurgerMenuOpen && (
+        <LeftSidebar burgerMenu={isBurgerMenuOpen} closeMenu={closeMenu} />
+      )}
+
       {/* Main Content Area */}
       <div className="mx-auto max-w-[1380px] px-4 py-3 sm:px-6">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-[200px_1fr] lg:grid-cols-[220px_1fr_300px] xl:grid-cols-[240px_1fr_360px]">
-          {/* Left Sidebar - Hidden on mobile */}
+          {/* Desktop Left Sidebar - Hidden on mobile */}
           <div className="hidden md:block">
-            <LeftSidebar burgerMenu={isBurgerMenuOpen} closeMenu={closeMenu} />
+            <LeftSidebar burgerMenu={false} closeMenu={closeMenu} />
           </div>
           
           {/* Main Content */}
