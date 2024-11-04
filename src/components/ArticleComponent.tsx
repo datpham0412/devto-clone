@@ -114,14 +114,16 @@ const ArticleComponent: React.FC<ArticleProps> = ({ data }) => {
           </Link>
 
           <Link href={url}>
-            <h3 className="mt-4 text-2xl hover:text-blue-600">{title}</h3>
+            <h3 className="mt-4 text-2xl hover:text-[#2F3AB2]">{title}</h3>
           </Link>
 
           <div className="mt-4 flex flex-wrap">
             {tag_list.map((tag, id) => (
               <Link key={id} href={`https://dev.to/t/${tag}`}>
-                <span className="p-1 text-sm text-gray-600 hover:text-gray-900">
-                  #{tag}
+                <span className="p-1 text-sm hover:text-gray-900">
+                  <span style={{
+                    color: `#${Math.floor(Math.random()*16777215).toString(16)}`
+                  }}>#</span>{tag}
                 </span>
               </Link>
             ))}
