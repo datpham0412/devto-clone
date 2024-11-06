@@ -13,7 +13,7 @@ export const env = createEnv({
       .default("development"),
     GITHUB_CLIENT_ID: z.string().min(1),
     GITHUB_CLIENT_SECRET: z.string().min(1),
-    NEXTAUTH_URL: z.string().url(),
+    NEXTAUTH_URL: z.string().url().optional().default("http://localhost:3000"),
     NEXTAUTH_SECRET: z.string().min(1),
   },
 
@@ -23,7 +23,7 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    NEXT_PUBLIC_APP_URL: z.string().url(),
+    NEXT_PUBLIC_APP_URL: z.string().url().optional().default("http://localhost:3000"),
   },
 
   /**
