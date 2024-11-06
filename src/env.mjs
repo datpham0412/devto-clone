@@ -3,4 +3,4 @@ import { z } from "zod";
 
 export const env = createEnv({
   // ... rest of your env configuration
-}); 
+});
